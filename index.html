@@ -106,6 +106,7 @@
     .due-card.extra { border-top: 5px solid #C59B27; background: #FFFDF7; }
     .due-card.korje { border-top: 5px solid #1A4684; background: #F4F8FE; }
     .due-card.paid { border-top: 5px solid #137333; background: #F6FCF7; }
+    .due-card.info { border-top: 5px solid var(--blue); background: #F8FAFE; }
 
     .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 16px; background: #FFF; }
     table { border-collapse: collapse; width: 100%; min-width: 860px; font-size: 14px; }
@@ -264,9 +265,9 @@
 
   <script>
     // =========================================================================
-    // 👇 আপনার Apps Script Web App URL-টি নিচে কোটেশনের ভেতর বসিয়ে দিন
+    // 🌐 আপনার লাইভ Apps Script Web App URL (সরাসরি যুক্ত করা হয়েছে)
     // =========================================================================
-    const APPS_SCRIPT_API_URL = "https://script.google.com/macros/s/AKfycby0IicRmW7zjrDg1bN-e2gioXEWePVfGrFIUJFK-q7DR6xyAmWTslX0bs1ztZMS997U/exec";
+    const APPS_SCRIPT_API_URL = "https://script.google.com/macros/s/AKfycbzPVN5KDuTQQh29pIHL-ZyciUQLKfEMhV0m0vyboQV-L7cQO_z_kQ_GO4m-hQAAzLNO/exec";
 
     let SESSION_TOKEN = '';
     let CURRENT_ROLE = '';
@@ -391,28 +392,37 @@
 
         '<!-- 🎯 ৩-স্তরের স্মার্ট ডিউ বক্স -->' +
         '<div class="dues-container">' +
-          '<!-- ১. মাসিক পেমেন্ট ডিউ -->' +
-          '<div class="due-card ' + (dues.monthly.isPaid ? 'paid' : 'monthly') + '">' +
-            '<div>' +
-              '<b style="font-size:16px;' + (dues.monthly.isPaid ? 'color:var(--green);' : 'color:var(--red);') + '">' +
-                (dues.monthly.isPaid ? '✓ মাসিক পেমেন্ট সম্পন্ন' : '🔴 চলতি মাসের পেমেন্ট ডিউ') +
-              '</b>' +
-              '<div style="font-size:24px;font-weight:800;margin:6px 0;">' + (dues.monthly.isPaid ? '৳ ০' : money(dues.monthly.amount)) + '</div>' +
-              '<div style="font-size:13px;color:var(--muted);">' + esc(dues.monthly.monthStr) + ' (সময়সীমা: ' + esc(dues.monthly.deadline) + ')</div>' +
-            '</div>' +
-            (!dues.monthly.isPaid ? '<button class="btn danger" style="padding:8px 14px;margin-top:14px;font-size:13px;" onclick="quickPay(\'MONTHLY\', ' + dues.monthly.amount + ')">এখনই পরিশোধ করুন</button>' : '') +
-          '</div>' +
+          '<!-- ১. মাসিক পেমেন্ট ডিউ (নভেম্বরের জন্য বন্ধ, ডিসেম্বর থেকে শুরু) -->' +
+          (dues.monthly && dues.monthly.isActive ?
+            '<div class="due-card ' + (dues.monthly.isPaid ? 'paid' : 'monthly') + '">' +
+              '<div>' +
+                '<b style="font-size:16px;' + (dues.monthly.isPaid ? 'color:var(--green);' : 'color:var(--red);') + '">' +
+                  (dues.monthly.isPaid ? '✓ মাসিক পেমেন্ট সম্পন্ন' : '🔴 চলতি মাসের পেমেন্ট ডিউ') +
+                '</b>' +
+                '<div style="font-size:24px;font-weight:800;margin:6px 0;">' + (dues.monthly.isPaid ? '৳ ০' : money(dues.monthly.amount)) + '</div>' +
+                '<div style="font-size:13px;color:var(--muted);">' + esc(dues.monthly.monthStr) + ' (সময়সীমা: ' + esc(dues.monthly.deadline) + ')</div>' +
+              '</div>' +
+              (!dues.monthly.isPaid ? '<button class="btn danger" style="padding:8px 14px;margin-top:14px;font-size:13px;" onclick="quickPay(\'MONTHLY\', ' + dues.monthly.amount + ')">এখনই পরিশোধ করুন</button>' : '') +
+            '</div>' :
+            '<div class="due-card info">' +
+              '<div>' +
+                '<b style="font-size:16px;color:var(--blue);">ℹ️ মাসিক পেমেন্ট নোটিশ</b>' +
+                '<div style="font-size:14px;font-weight:600;margin:8px 0;color:var(--ink);">নভেম্বর মাসে কোনো মাসিক পেমেন্টের ডিউ নেই।</div>' +
+                '<div style="font-size:12px;color:var(--muted);">আগামী ডিসেম্বর ২০২৬ থেকে ৫,০০০ ৳ মাসিক পেমেন্ট শুরু হবে। নভেম্বরে সাধারণ জমা প্রদান করুন।</div>' +
+              '</div>' +
+              '<button class="btn secondary" style="padding:8px 14px;margin-top:14px;font-size:13px;" onclick="quickPay(\'EXTRA\', 0)">সাধারণ জমা দিন</button>' +
+            '</div>') +
 
-          '<!-- ২. অতিরিক্ত জমার ডিউ -->' +
+          '<!-- ২. অতিরিক্ত জমার ডিউ (পরিশোধ না করা পর্যন্ত ডেডলাইন পার হলেও আজীবন থাকবে) -->' +
           (dues.extra ? 
             '<div class="due-card extra">' +
               '<div>' +
                 '<b style="font-size:16px;color:var(--gold-dark);">🟠 অতিরিক্ত জমার ডিউ</b>' +
                 '<div style="font-size:24px;font-weight:800;margin:6px 0;color:var(--gold-dark);">' + money(dues.extra.amount) + '</div>' +
                 '<div style="font-size:13px;color:var(--ink);"><b>' + esc(dues.extra.title) + '</b></div>' +
-                '<div style="font-size:12px;color:var(--muted);">পরিশোধের শেষ তারিখ: ' + esc(dues.extra.deadline) + '</div>' +
+                '<div style="font-size:12px;color:var(--red);margin-top:4px;">পরিশোধের শেষ তারিখ: <b>' + esc(dues.extra.deadline) + '</b></div>' +
               '</div>' +
-              '<button class="btn gold" style="padding:8px 14px;margin-top:14px;font-size:13px;" onclick="quickPay(\'EXTRA\', ' + dues.extra.amount + ', \'' + esc(dues.extra.title) + '\')">এখনই পরিশোধ করুন</button>' +
+              '<button class="btn gold" style="padding:8px 14px;margin-top:14px;font-size:13px;" onclick="quickPay(\'EXTRA\', ' + dues.extra.amount + ', \'\', \'' + esc(dues.extra.demandId) + '\')">এখনই পরিশোধ করুন</button>' +
             '</div>' : '') +
 
           '<!-- ৩. করজে হাসানা ইনস্টলমেন্ট ডিউ -->' +
@@ -438,7 +448,7 @@
         '<div class="card"><h3 style="margin:0 0 16px;color:var(--blue);">আপনার জমার ইতিহাস</h3>' + paymentTable(r.payments, false) + '</div>';
     }
 
-    function quickPay(type, amount, desc = '', korjeId = '') {
+    function quickPay(type, amount, desc = '', refId = '') {
       openPaymentForm();
       const typeEl = $('payTypeSelect');
       const amtEl = $('payAmountInput');
@@ -446,8 +456,8 @@
         typeEl.value = type;
         togglePaymentTypeFields('member');
       }
-      if (amtEl) amtEl.value = amount;
-      if (korjeId && $('payKorjeIdHidden')) $('payKorjeIdHidden').value = korjeId;
+      if (amtEl && amount > 0) amtEl.value = amount;
+      if (refId && $('payRefIdHidden')) $('payRefIdHidden').value = refId;
       window.scrollTo({ top: $('memberFormArea').offsetTop - 30, behavior: 'smooth' });
     }
 
@@ -479,9 +489,9 @@
             '</label>' +
 
             '<label>পেমেন্ট মেথড<select name="method" required><option value="">সিলেক্ট করুন</option><option value="bKash">bKash</option><option value="Nagad">Nagad</option><option value="Rocket">Rocket</option><option value="Bank">Bank Deposit</option><option value="Cash">Cash (নগদ)</option></select></label>' +
-            '<label class="wide">Transaction ID<input name="transactionId" required placeholder="যেমন: TR984X72"></label>' +
+            '<label class="wide">Transaction ID / রসিদ নম্বর<input name="transactionId" required placeholder="যেমন: TR984X72"></label>' +
             '<label>টাকা পাঠানোর তারিখ<input name="paymentDate" type="date" value="' + todayStr + '" max="' + todayStr + '" required></label>' +
-            '<input type="hidden" name="korjeId" id="payKorjeIdHidden">' +
+            '<input type="hidden" name="refId" id="payRefIdHidden">' +
             
             '<div class="wide" style="margin-top:14px;"><button class="btn primary" type="submit">আবেদন সম্পন্ন করুন</button> <button class="btn ghost" type="button" onclick="$(\'memberFormArea\').innerHTML=\'\'">বন্ধ</button><div id="paymentFormMsg" class="message"></div></div>' +
           '</form>' +
@@ -814,7 +824,7 @@
       if (r.ok) { await loadAdmin(); adminTab('notices'); }
     }
 
-    // 6. Members Tab
+    // 6. Members Tab (সদস্য তৈরির সময় প্রাথমিক সাধারণ জমা অন্তর্ভুক্ত)
     function adminMembersHtml() {
       const rows = APP_DATA.members || [];
       return '<div class="card">' +
@@ -835,6 +845,8 @@
             '<label>মোবাইল<input name="mobile" placeholder="017xxxxxxxx"></label>' +
             '<label>যোগদানের তারিখ<input name="joiningDate" type="date"></label>' +
             '<label class="wide">ঠিকানা / প্রতিষ্ঠান<input name="address" placeholder="ঠিকানা"></label>' +
+            '<label>প্রাথমিক সাধারণ জমা (ঐচ্ছিক, ৳)<input name="initialDeposit" type="number" step="0.01" min="0" placeholder="যেমন: 5000"></label>' +
+            '<label>জমা গ্রহণের মেথড<select name="depositMethod"><option value="Cash">Cash (নগদ গ্রহণ)</option><option value="Bank">Bank Deposit</option><option value="bKash">bKash</option><option value="Nagad">Nagad</option></select></label>' +
             '<label class="wide">প্রাথমিক পাসওয়ার্ড (কমপক্ষে ১০ অক্ষর)<input name="password" type="password" minlength="10" required></label>' +
             '<div class="wide" style="margin-top:14px;"><button class="btn primary" type="submit">নিবন্ধন সম্পন্ন করুন</button> <div id="createMemberMsg" class="message"></div></div>' +
           '</form>' +
