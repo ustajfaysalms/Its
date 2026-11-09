@@ -44,7 +44,7 @@
     .login-logo-wrap .app-real-logo { max-height: 84px; max-width: 380px; }
     .nav-logo-wrap .app-real-logo { max-height: 48px; max-width: 270px; }
 
-    /* ক্লিন মেনুবার: বামে লোগো, ডানে লগআউট (মাঝখানে কোনো টেক্সট নেই) */
+    /* ক্লিন মেনুবার: বামে শুধুই লোগো, ডানে শুধুই লগআউট বাটন */
     .topbar {
       min-height: 76px; background: #FFF; border-bottom: 3px solid var(--gold);
       display: flex; align-items: center; justify-content: space-between;
@@ -107,7 +107,6 @@
     .due-card.extra { border-top: 5px solid #C59B27; background: #FFFDF7; }
     .due-card.korje { border-top: 5px solid #1A4684; background: #F4F8FE; }
     .due-card.paid { border-top: 5px solid #137333; background: #F6FCF7; }
-    .due-card.info { border-top: 5px solid var(--blue); background: #F8FAFE; }
 
     .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 16px; background: #FFF; }
     table { border-collapse: collapse; width: 100%; min-width: 860px; font-size: 14px; }
@@ -212,7 +211,7 @@
 
     <!-- App View -->
     <section id="appView" class="hidden">
-      <!-- ক্লিন টপবার: বামে শুধুই লোগো, ডানে শুধুই লগআউট (মাঝখানে কোনো টেক্সট নেই) -->
+      <!-- ক্লিন টপবার: বামে শুধুই লোগো, ডানে শুধুই লগআউট বাটন (মাঝখানে কোনো টেক্সট নেই) -->
       <header class="topbar">
         <div class="app-logo-wrap nav-logo-wrap">
           <img id="navLogoImg" class="app-real-logo" src="https://lh3.googleusercontent.com/d/1r5oIdwSE-g5kqbn832-oqW30ixJN5pXP" alt="Logo">
@@ -266,9 +265,9 @@
 
   <script>
     // =========================================================================
-    // 🌐 আপনার লাইভ Apps Script Web App URL (সরাসরি যুক্ত করা হয়েছে)
+    // 🌐 আপনার লাইভ Apps Script Web App URL
     // =========================================================================
-    const APPS_SCRIPT_API_URL = "https://script.google.com/macros/s/AKfycby1YCd0_3VBNQYXJUdPTNG0bBnMtq0waARzysM0wkiSrxJZQ_24UjIrXj64YMfG2p_C/exec";
+    const APPS_SCRIPT_API_URL = "https://script.google.com/macros/s/AKfycbzXJgWGs4RXG9kv7-C4GkqE5ZZRrk8F9fVcMjAjdmYXEvPr0DM6aPdRAmSX9nOElNDU/exec";
 
     let SESSION_TOKEN = '';
     let CURRENT_ROLE = '';
@@ -290,7 +289,7 @@
       return '<img class="avatar-photo" src="' + esc(url) + '" alt="Photo" referrerpolicy="no-referrer" onerror="this.outerHTML=\'<div class=\\\'avatar-fallback\\\'>' + fallback + '</div>\'">';
     }
 
-    // Universal Runner (Supports both Google Apps Script and GitHub Pages)
+    // Universal Runner
     async function callServer(action, ...args) {
       showGlobalLoader();
       if (window.google && google.script && google.script.run) {
@@ -398,28 +397,24 @@
 
         '<!-- 🎯 ৩-স্তরের স্মার্ট ডিউ বক্স -->' +
         '<div class="dues-container">' +
-          '<!-- ১. মাসিক পেমেন্ট ডিউ (নভেম্বরে ডিউ নেই, ডিসেম্বর থেকে শুরু) -->' +
-          (dues.monthly && dues.monthly.isActive ?
-            '<div class="due-card ' + (dues.monthly.isPaid ? 'paid' : 'monthly') + '">' +
-              '<div>' +
-                '<b style="font-size:16px;' + (dues.monthly.isPaid ? 'color:var(--green);' : 'color:var(--red);') + '">' +
-                  (dues.monthly.isPaid ? '✓ মাসিক পেমেন্ট সম্পন্ন' : '🔴 চলতি মাসের পেমেন্ট ডিউ') +
-                '</b>' +
-                '<div style="font-size:24px;font-weight:800;margin:6px 0;">' + (dues.monthly.isPaid ? '৳ ০' : money(dues.monthly.amount)) + '</div>' +
-                '<div style="font-size:13px;color:var(--muted);">' + esc(dues.monthly.monthStr) + ' (সময়সীমা: ' + esc(dues.monthly.deadline) + ')</div>' +
+          '<!-- ১. মাসিক পেমেন্ট ডিউ (নভেম্বর থেকেই কার্যকর ও কিউমুলেটিভ) -->' +
+          '<div class="due-card ' + (dues.monthly.isPaid ? 'paid' : 'monthly') + '">' +
+            '<div>' +
+              '<b style="font-size:16px;' + (dues.monthly.isPaid ? 'color:var(--green);' : 'color:var(--red);') + '">' +
+                (dues.monthly.isPaid ? '✓ সকল মাসিক পেমেন্ট পরিশোধিত' : '🔴 বকেয়া মাসিক পেমেন্ট ডিউ') +
+              '</b>' +
+              '<div style="font-size:24px;font-weight:800;margin:6px 0;">' +
+                (dues.monthly.isPaid ? '৳ ০' : money(dues.monthly.amount)) +
               '</div>' +
-              (!dues.monthly.isPaid ? '<button class="btn danger" style="padding:8px 14px;margin-top:14px;font-size:13px;" onclick="quickPay(\'MONTHLY\', ' + dues.monthly.amount + ')">এখনই পরিশোধ করুন</button>' : '') +
-            '</div>' :
-            '<div class="due-card info">' +
-              '<div>' +
-                '<b style="font-size:16px;color:var(--blue);">ℹ️ মাসিক পেমেন্ট নোটিশ</b>' +
-                '<div style="font-size:14px;font-weight:600;margin:8px 0;color:var(--ink);">নভেম্বর মাসে কোনো মাসিক পেমেন্টের ডিউ নেই।</div>' +
-                '<div style="font-size:12px;color:var(--muted);">আগামী ডিসেম্বর ২০২৬ থেকে ৫,০০০ ৳ মাসিক পেমেন্ট শুরু হবে। নভেম্বরে সাধারণ জমা প্রদান করুন।</div>' +
+              '<div style="font-size:13px;color:var(--muted);">' +
+                (dues.monthly.isPaid ? 'কোনো মাসিক ফি বকেয়া নেই' : dues.monthly.monthStr + ' (সময়সীমা: ' + dues.monthly.deadline + ')') +
               '</div>' +
-              '<button class="btn secondary" style="padding:8px 14px;margin-top:14px;font-size:13px;" onclick="quickPay(\'EXTRA\', 0)">সাধারণ জমা দিন</button>' +
-            '</div>') +
+              (!dues.monthly.isPaid && dues.monthly.monthsCount > 1 ? '<div style="font-size:12px;color:var(--red);font-weight:700;margin-top:4px;">⚠️ মোট ' + dues.monthly.monthsCount + ' মাসের পেমেন্ট বকেয়া রয়েছে</div>' : '') +
+            '</div>' +
+            (!dues.monthly.isPaid ? '<button class="btn danger" style="padding:8px 14px;margin-top:14px;font-size:13px;" onclick="quickPay(\'MONTHLY\', ' + dues.monthly.amount + ')">এখনই পরিশোধ করুন</button>' : '') +
+          '</div>' +
 
-          '<!-- ২. অতিরিক্ত জমার ডিউ (পরিশোধ না করা পর্যন্ত থাকবে, পরিশোধ হলে চলে যাবে) -->' +
+          '<!-- ২. অতিরিক্ত জমার ডিউ (পরিশোধ না করা পর্যন্ত ডেডলাইন পার হলেও আজীবন থাকবে, পরিশোধ হলে চলে যাবে) -->' +
           (dues.extra ? 
             '<div class="due-card extra">' +
               '<div>' +
@@ -892,7 +887,6 @@
         showMessage('createMemberMsg', r.message, r.ok);
         if (!r.ok) return;
 
-        // ছবি থাকলে অ্যাডমিন কর্তৃক আপলোড
         if (file) {
           const reader = new FileReader();
           reader.onload = async () => {
@@ -938,7 +932,6 @@
         showMessage('editMemberMsg', r.message, r.ok);
         if (!r.ok) return;
 
-        // ছবি নির্বাচিত হলে আপলোড করা
         if (file) {
           const reader = new FileReader();
           reader.onload = async () => {
