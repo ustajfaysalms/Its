@@ -44,6 +44,7 @@
     .login-logo-wrap .app-real-logo { max-height: 84px; max-width: 380px; }
     .nav-logo-wrap .app-real-logo { max-height: 48px; max-width: 270px; }
 
+    /* ক্লিন মেনুবার: বামে লোগো, ডানে লগআউট (মাঝখানে কোনো টেক্সট নেই) */
     .topbar {
       min-height: 76px; background: #FFF; border-bottom: 3px solid var(--gold);
       display: flex; align-items: center; justify-content: space-between;
@@ -211,13 +212,13 @@
 
     <!-- App View -->
     <section id="appView" class="hidden">
+      <!-- ক্লিন টপবার: বামে শুধুই লোগো, ডানে শুধুই লগআউট (মাঝখানে কোনো টেক্সট নেই) -->
       <header class="topbar">
         <div class="app-logo-wrap nav-logo-wrap">
           <img id="navLogoImg" class="app-real-logo" src="https://lh3.googleusercontent.com/d/1r5oIdwSE-g5kqbn832-oqW30ixJN5pXP" alt="Logo">
         </div>
-        <div style="display:flex;align-items:center;gap:14px;">
-          <span id="headerUser" style="color:var(--muted);font-size:14px;font-weight:700;"></span>
-          <button id="logoutBtn" class="btn ghost" style="padding:8px 16px;">লগআউট</button>
+        <div>
+          <button id="logoutBtn" class="btn ghost" style="padding:8px 18px;font-weight:700;">লগআউট</button>
         </div>
       </header>
 
@@ -267,7 +268,7 @@
     // =========================================================================
     // 🌐 আপনার লাইভ Apps Script Web App URL (সরাসরি যুক্ত করা হয়েছে)
     // =========================================================================
-    const APPS_SCRIPT_API_URL = "https://script.google.com/macros/s/AKfycbya5jhURWzVjMLx2Sb0ZkdRPiJXyt_vpRWnrHNQNJBwppWYB_md_r2nJ1mEeBJhIjB3/exec";
+    const APPS_SCRIPT_API_URL = "https://script.google.com/macros/s/AKfycby1YCd0_3VBNQYXJUdPTNG0bBnMtq0waARzysM0wkiSrxJZQ_24UjIrXj64YMfG2p_C/exec";
 
     let SESSION_TOKEN = '';
     let CURRENT_ROLE = '';
@@ -289,7 +290,7 @@
       return '<img class="avatar-photo" src="' + esc(url) + '" alt="Photo" referrerpolicy="no-referrer" onerror="this.outerHTML=\'<div class=\\\'avatar-fallback\\\'>' + fallback + '</div>\'">';
     }
 
-    // 🌐 Universal Runner (Supports both Google Apps Script AND GitHub Pages!)
+    // Universal Runner (Supports both Google Apps Script and GitHub Pages)
     async function callServer(action, ...args) {
       showGlobalLoader();
       if (window.google && google.script && google.script.run) {
@@ -344,7 +345,6 @@
     async function enterApp(r) {
       SESSION_TOKEN = r.token;
       CURRENT_ROLE = r.role;
-      $('headerUser').textContent = ((r.profile && (r.profile.Full_Name || r.profile.Member_ID)) || 'সদস্য') + ' • ' + r.role;
       $('mustChangeNotice').classList.toggle('hidden', !r.mustChangePassword);
 
       $('loginView').classList.add('hidden');
@@ -383,16 +383,22 @@
       const target = $('memberView'); target.classList.remove('hidden');
       const p = r.profile;
       const dues = r.dues || {};
+      const hasPhoto = Boolean(p.Photo_URL && p.Photo_URL.trim());
 
       target.innerHTML =
         '<div class="card profile-row">' +
           memberPhotoHtml(p.Photo_URL, p.Full_Name) +
-          '<div style="flex:1;"><b style="font-size:20px;color:var(--blue);">' + esc(p.Full_Name) + '</b><div style="font-size:13px;color:var(--muted);">Member ID: <b>' + esc(p.Member_ID) + '</b> • ' + statusBadge(p.Status) + '</div><div style="font-size:13px;color:var(--muted);">' + esc(p.Mobile || '-') + '</div></div>' +
-        '</div>' +
+          '<div style="flex:1;"><b style="font-size:20px;color:var(--blue);">' + esc(p.Full_Name) + '</b><div style="font-size:13px;color:var(--muted);">Member ID: <b>' + esc(p.Member_ID) + '</b> • ' + statusBadge(p.Status) + '</div><div style="font-size:13px;color:var(--muted);">' + esc(p.Mobile || '-') + '</div>' +
+          (hasPhoto ?
+            '<div style="font-size:12px;color:var(--green);font-weight:600;margin-top:6px;">✓ প্রোফাইল ছবি সংরক্ষিত (পরিবর্তনযোগ্য নয়)</div>' :
+            '<div><button class="btn secondary" style="padding:6px 14px;font-size:13px;margin-top:8px;" onclick="uploadOwnPhoto()">📷 ছবি আপলোড করুন</button>' +
+            '<div class="input-subtext" style="color:var(--muted);font-size:11px;">প্রথমবার একবারই ছবি আপলোড করতে পারবেন। পরবর্তীতে পরিবর্তনের জন্য অ্যাডমিনের সাথে যোগাযোগ করুন।</div></div>'
+          ) +
+          '</div></div>' +
 
         '<!-- 🎯 ৩-স্তরের স্মার্ট ডিউ বক্স -->' +
         '<div class="dues-container">' +
-          '<!-- ১. মাসিক পেমেন্ট ডিউ (নভেম্বরের জন্য বন্ধ, ডিসেম্বর থেকে শুরু) -->' +
+          '<!-- ১. মাসিক পেমেন্ট ডিউ (নভেম্বরে ডিউ নেই, ডিসেম্বর থেকে শুরু) -->' +
           (dues.monthly && dues.monthly.isActive ?
             '<div class="due-card ' + (dues.monthly.isPaid ? 'paid' : 'monthly') + '">' +
               '<div>' +
@@ -413,7 +419,7 @@
               '<button class="btn secondary" style="padding:8px 14px;margin-top:14px;font-size:13px;" onclick="quickPay(\'EXTRA\', 0)">সাধারণ জমা দিন</button>' +
             '</div>') +
 
-          '<!-- ২. অতিরিক্ত জমার ডিউ (পরিশোধ না করা পর্যন্ত ডেডলাইন পার হলেও আজীবন থাকবে) -->' +
+          '<!-- ২. অতিরিক্ত জমার ডিউ (পরিশোধ না করা পর্যন্ত থাকবে, পরিশোধ হলে চলে যাবে) -->' +
           (dues.extra ? 
             '<div class="due-card extra">' +
               '<div>' +
@@ -443,9 +449,32 @@
           '<div class="stat"><div class="stat-label">সোসাইটির মোট তহবিল</div><div class="stat-value">' + money(r.organizationTotal) + '</div></div>' +
         '</div>' +
 
-        '<div style="margin-bottom:24px;"><button class="btn primary" onclick="openPaymentForm()">＋ নতুন পেমেন্ট আবেদন করুন</button></div>' +
+        '<div style="display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap;">' +
+          '<button class="btn primary" onclick="openPaymentForm()">＋ নতুন পেমেন্ট আবেদন করুন</button>' +
+          '<button class="btn secondary" onclick="openPasswordForm(false)">পাসওয়ার্ড পরিবর্তন</button>' +
+        '</div>' +
         '<div id="memberFormArea"></div>' +
         '<div class="card"><h3 style="margin:0 0 16px;color:var(--blue);">আপনার জমার ইতিহাস</h3>' + paymentTable(r.payments, false) + '</div>';
+    }
+
+    // মেম্বার প্রথমবার ছবি আপলোড
+    async function uploadOwnPhoto() {
+      const picker = document.createElement('input');
+      picker.type = 'file';
+      picker.accept = 'image/jpeg,image/png,image/webp';
+      picker.onchange = async () => {
+        const file = picker.files && picker.files[0];
+        if (!file) return;
+        if (file.size > 2 * 1024 * 1024) { toast('ছবির সাইজ ২ MB-এর কম হতে হবে।'); return; }
+        const reader = new FileReader();
+        reader.onload = async () => {
+          const r = await callServer('apiMemberUploadPhoto', SESSION_TOKEN, { dataUrl: reader.result });
+          toast(r.message);
+          if (r.ok) loadMember();
+        };
+        reader.readAsDataURL(file);
+      };
+      picker.click();
     }
 
     function quickPay(type, amount, desc = '', refId = '') {
@@ -824,13 +853,13 @@
       if (r.ok) { await loadAdmin(); adminTab('notices'); }
     }
 
-    // 6. Members Tab (সদস্য তৈরির সময় প্রাথমিক সাধারণ জমা অন্তর্ভুক্ত)
+    // 6. Members Tab (অ্যাডমিন তৈরি ও যতবার ইচ্ছা ছবি পরিবর্তন)
     function adminMembersHtml() {
       const rows = APP_DATA.members || [];
       return '<div class="card">' +
         '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><h3 style="margin:0;color:var(--blue);font-size:20px;">সদস্য তালিকা (' + rows.length + ' জন)</h3><button class="btn primary" onclick="showCreateMember()">＋ নতুন সদস্য যোগ করুন</button></div>' +
         '<div class="table-wrap"><table><thead><tr><th>আইডি</th><th>নাম</th><th>মোবাইল</th><th>মোট জমা</th><th>স্ট্যাটাস</th><th>অ্যাকশন</th></tr></thead><tbody>' +
-        rows.map(m => '<tr><td><b>' + esc(m.Member_ID) + '</b></td><td>' + esc(m.Full_Name) + '</td><td>' + esc(m.Mobile || '-') + '</td><td>' + money(m.Total_Deposit) + '</td><td>' + statusBadge(m.Status) + '</td><td><button class="btn secondary" style="padding:6px 12px;font-size:12px;" onclick="showEditMember(\'' + esc(m.Member_ID) + '\')">এডিট</button> <button class="btn ghost" style="padding:6px 12px;font-size:12px;" onclick="toggleMemberStatus(\'' + esc(m.Member_ID) + '\',\'' + (m.Status === 'ACTIVE' ? 'INACTIVE' : 'ACTIVE') + '\')">' + (m.Status === 'ACTIVE' ? 'নিষ্ক্রিয়' : 'সক্রিয়') + '</button></td></tr>').join('') +
+        rows.map(m => '<tr><td><b>' + esc(m.Member_ID) + '</b></td><td>' + esc(m.Full_Name) + '</td><td>' + esc(m.Mobile || '-') + '</td><td>' + money(m.Total_Deposit) + '</td><td>' + statusBadge(m.Status) + '</td><td><button class="btn secondary" style="padding:6px 12px;font-size:12px;" onclick="showEditMember(\'' + esc(m.Member_ID) + '\')">এডিট / ছবি</button> <button class="btn ghost" style="padding:6px 12px;font-size:12px;" onclick="toggleMemberStatus(\'' + esc(m.Member_ID) + '\',\'' + (m.Status === 'ACTIVE' ? 'INACTIVE' : 'ACTIVE') + '\')">' + (m.Status === 'ACTIVE' ? 'নিষ্ক্রিয়' : 'সক্রিয়') + '</button></td></tr>').join('') +
         '</tbody></table></div>' +
       '</div>';
     }
@@ -847,6 +876,7 @@
             '<label class="wide">ঠিকানা / প্রতিষ্ঠান<input name="address" placeholder="ঠিকানা"></label>' +
             '<label>প্রাথমিক সাধারণ জমা (ঐচ্ছিক, ৳)<input name="initialDeposit" type="number" step="0.01" min="0" placeholder="যেমন: 5000"></label>' +
             '<label>জমা গ্রহণের মেথড<select name="depositMethod"><option value="Cash">Cash (নগদ গ্রহণ)</option><option value="Bank">Bank Deposit</option><option value="bKash">bKash</option><option value="Nagad">Nagad</option></select></label>' +
+            '<label class="wide">প্রোফাইল ছবি (ঐচ্ছিক, সর্বোচ্চ ২ MB)<input type="file" id="createMemberPhotoFile" accept="image/jpeg,image/png,image/webp"></label>' +
             '<label class="wide">প্রাথমিক পাসওয়ার্ড (কমপক্ষে ১০ অক্ষর)<input name="password" type="password" minlength="10" required></label>' +
             '<div class="wide" style="margin-top:14px;"><button class="btn primary" type="submit">নিবন্ধন সম্পন্ন করুন</button> <div id="createMemberMsg" class="message"></div></div>' +
           '</form>' +
@@ -855,9 +885,25 @@
       $('createMemberForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const f = new FormData(e.target);
-        const r = await callServer('apiAdminCreateMember', SESSION_TOKEN, Object.fromEntries(f));
+        const file = $('createMemberPhotoFile') ? $('createMemberPhotoFile').files[0] : null;
+        const payload = Object.fromEntries(f);
+
+        const r = await callServer('apiAdminCreateMember', SESSION_TOKEN, payload);
         showMessage('createMemberMsg', r.message, r.ok);
-        if (r.ok) { toast(r.message); await loadAdmin(); adminTab('members'); }
+        if (!r.ok) return;
+
+        // ছবি থাকলে অ্যাডমিন কর্তৃক আপলোড
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = async () => {
+            await callServer('apiAdminUploadMemberPhoto', SESSION_TOKEN, payload.memberId, { dataUrl: reader.result });
+            await loadAdmin(); adminTab('members');
+          };
+          reader.readAsDataURL(file);
+        } else {
+          await loadAdmin(); adminTab('members');
+        }
+        toast('সদস্য সফলভাবে নিবন্ধিত হয়েছে!');
       });
     }
 
@@ -867,22 +913,43 @@
 
       $('adminFormArea').innerHTML =
         '<div class="card" style="border:1.5px solid var(--blue);">' +
-          '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><h3 style="margin:0;color:var(--blue);">তথ্য সংশোধন (' + esc(m.Member_ID) + ')</h3><button class="btn ghost" onclick="$(\'adminFormArea\').innerHTML=\'\'">বন্ধ</button></div>' +
+          '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><h3 style="margin:0;color:var(--blue);">সদস্যের তথ্য ও ছবি পরিবর্তন (' + esc(m.Member_ID) + ')</h3><button class="btn ghost" onclick="$(\'adminFormArea\').innerHTML=\'\'">বন্ধ</button></div>' +
+          '<div class="profile-row" style="margin-bottom:14px;">' +
+            memberPhotoHtml(m.Photo_URL, m.Full_Name) +
+            '<div><b>' + esc(m.Full_Name) + '</b><div style="font-size:12px;color:var(--muted);">আইডি: ' + esc(m.Member_ID) + '</div></div>' +
+          '</div>' +
           '<form id="editMemberForm" class="form-grid">' +
             '<input type="hidden" name="memberId" value="' + esc(m.Member_ID) + '">' +
             '<label>পুরো নাম<input name="name" value="' + esc(m.Full_Name) + '" required></label>' +
             '<label>মোবাইল<input name="mobile" value="' + esc(m.Mobile) + '"></label>' +
             '<label class="wide">ঠিকানা / প্রতিষ্ঠান<input name="address" value="' + esc(m.Address) + '"></label>' +
-            '<div class="wide" style="margin-top:14px;"><button class="btn primary" type="submit">সংরক্ষণ করুন</button> <div id="editMemberMsg" class="message"></div></div>' +
+            '<label class="wide">ছবি পরিবর্তন / নতুন ছবি আপলোড (ঐচ্ছিক)<input type="file" id="editMemberPhotoFile" accept="image/jpeg,image/png,image/webp"><div class="input-subtext">অ্যাডমিন যতবার ইচ্ছা ছবি পরিবর্তন ও প্রতিস্থাপন করতে পারবেন।</div></label>' +
+            '<div class="wide" style="margin-top:14px;"><button class="btn primary" type="submit">তথ্য ও ছবি সংরক্ষণ করুন</button> <div id="editMemberMsg" class="message"></div></div>' +
           '</form>' +
         '</div>';
 
       $('editMemberForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const f = new FormData(e.target);
-        const r = await callServer('apiAdminUpdateMember', SESSION_TOKEN, Object.fromEntries(f));
+        const file = $('editMemberPhotoFile') ? $('editMemberPhotoFile').files[0] : null;
+        const payload = Object.fromEntries(f);
+
+        const r = await callServer('apiAdminUpdateMember', SESSION_TOKEN, payload);
         showMessage('editMemberMsg', r.message, r.ok);
-        if (r.ok) { toast(r.message); await loadAdmin(); adminTab('members'); }
+        if (!r.ok) return;
+
+        // ছবি নির্বাচিত হলে আপলোড করা
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = async () => {
+            await callServer('apiAdminUploadMemberPhoto', SESSION_TOKEN, payload.memberId, { dataUrl: reader.result });
+            await loadAdmin(); adminTab('members');
+          };
+          reader.readAsDataURL(file);
+        } else {
+          await loadAdmin(); adminTab('members');
+        }
+        toast('সদস্যের তথ্য আপডেট হয়েছে!');
       });
     }
 
