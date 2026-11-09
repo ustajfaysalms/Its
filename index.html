@@ -401,7 +401,7 @@
           '<div class="due-card ' + (dues.monthly.isPaid ? 'paid' : 'monthly') + '">' +
             '<div>' +
               '<b style="font-size:16px;' + (dues.monthly.isPaid ? 'color:var(--green);' : 'color:var(--red);') + '">' +
-                (dues.monthly.isPaid ? '✓ সকল মাসিক পেমেন্ট পরিশোধিত' : '🔴 বকেয়া মাসিক পেমেন্ট ডিউ') +
+                (dues.monthly.isPaid ? '✓ সকল মাসিক পেমেন্ট পরিশোধিত' : '🔴 মাসিক পেমেন্ট ডিউ') +
               '</b>' +
               '<div style="font-size:24px;font-weight:800;margin:6px 0;">' +
                 (dues.monthly.isPaid ? '৳ ০' : money(dues.monthly.amount)) +
@@ -418,7 +418,7 @@
           (dues.extra ? 
             '<div class="due-card extra">' +
               '<div>' +
-                '<b style="font-size:16px;color:var(--gold-dark);">🟠 অতিরিক্ত জমার ডিউ</b>' +
+                '<b style="font-size:16px;color:var(--gold-dark);">🟠 সাধারণ জমার ডিউ</b>' +
                 '<div style="font-size:24px;font-weight:800;margin:6px 0;color:var(--gold-dark);">' + money(dues.extra.amount) + '</div>' +
                 '<div style="font-size:13px;color:var(--ink);"><b>' + esc(dues.extra.title) + '</b></div>' +
                 '<div style="font-size:12px;color:var(--red);margin-top:4px;">পরিশোধের শেষ তারিখ: <b>' + esc(dues.extra.deadline) + '</b></div>' +
