@@ -243,6 +243,27 @@
     .perm-grid-table th { background: #F8FAFE; color: var(--blue); }
     .perm-grid-table input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--blue); }
 
+
+    /* Master Admin analytics dashboard */
+    .admin-hero{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 26px;border-radius:22px;background:linear-gradient(120deg,#0b2852,#17477f);color:#fff;margin-bottom:20px;box-shadow:0 12px 28px rgba(15,44,89,.14)}
+    .admin-hero h2{margin:0;font-size:24px}.admin-hero p{margin:4px 0 0;color:#d8e6f8;font-size:13px}
+    .admin-kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:0 0 18px}
+    .admin-kpi{background:#fff;border:1px solid var(--line);border-radius:18px;padding:17px;min-width:0;box-shadow:0 5px 18px rgba(15,44,89,.045);position:relative;overflow:hidden}
+    .admin-kpi:after{content:"";position:absolute;width:78px;height:78px;border-radius:50%;right:-24px;top:-28px;background:var(--tint,#edf4ff)}
+    .admin-kpi-label{font-size:12px;color:var(--muted);font-weight:700;position:relative;z-index:1}.admin-kpi-value{font-size:clamp(19px,2vw,27px);font-weight:800;color:var(--blue);margin-top:8px;position:relative;z-index:1;overflow-wrap:anywhere}.admin-kpi-note{font-size:11px;color:var(--muted);margin-top:3px;position:relative;z-index:1}
+    .admin-analytics-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.85fr);gap:16px;margin-bottom:16px}
+    .admin-chart-card{background:#fff;border:1px solid var(--line);border-radius:19px;padding:20px;box-shadow:0 5px 18px rgba(15,44,89,.04);min-width:0}
+    .admin-chart-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 0 16px;color:var(--blue);font-size:16px;font-weight:800}.admin-chart-sub{font-size:11px;color:var(--muted);font-weight:500}
+    .bar-chart{height:205px;display:flex;align-items:flex-end;gap:clamp(7px,1.4vw,16px);padding:12px 4px 0;border-bottom:1px solid var(--line);background:repeating-linear-gradient(to top,transparent 0,transparent 49px,#edf1f7 50px)}
+    .bar-item{flex:1;min-width:0;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}.bar-value{font-size:10px;color:var(--muted);white-space:nowrap}.bar-fill{width:min(100%,34px);min-height:3px;border-radius:8px 8px 2px 2px;background:linear-gradient(180deg,#4c9cf0,#16457f);box-shadow:0 3px 8px rgba(22,69,127,.15)}.bar-label{font-size:10px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+    .donut-layout{display:flex;align-items:center;gap:18px;min-height:205px}.donut{width:148px;height:148px;border-radius:50%;flex:none;display:grid;place-items:center;background:conic-gradient(#188653 0 var(--paid),#e9b84d var(--paid) var(--pending),#e7edf5 var(--pending) 100%);position:relative}.donut:before{content:"";position:absolute;inset:18px;background:#fff;border-radius:50%}.donut-center{position:relative;text-align:center}.donut-center strong{display:block;font-size:24px;color:var(--blue)}.donut-center span{font-size:10px;color:var(--muted)}
+    .legend{display:grid;gap:12px;min-width:0}.legend-row{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}.legend-dot{width:9px;height:9px;border-radius:50%;flex:none}.legend-row b{margin-left:auto;color:var(--ink);white-space:nowrap}
+    .admin-mini-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-bottom:16px}.mini-track{height:10px;background:#edf2f8;border-radius:20px;overflow:hidden;margin:8px 0 5px}.mini-track span{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,#2f80c9,#16457f)}.category-row{margin:12px 0}.category-head{display:flex;justify-content:space-between;gap:10px;font-size:12px}.admin-alert{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 15px;background:#fff8e9;border:1px solid #f3dfad;border-radius:14px;margin:0 0 16px}.admin-alert b{color:#855d0a}.member-profile-hero{display:flex;align-items:center;gap:14px;padding:18px;border-radius:19px;background:linear-gradient(110deg,#fff,#f0f5fc);border:1px solid var(--line);margin-bottom:16px}.member-profile-hero .avatar-photo,.member-profile-hero .avatar-fallback{width:72px;height:72px;flex:none}.member-profile-copy{min-width:0;flex:1}.member-profile-copy h2{font-size:19px;margin:0;color:var(--blue)}.member-profile-copy p{margin:2px 0 0;color:var(--muted);font-size:12px}.member-profile-id{font-size:12px;font-weight:800;color:var(--blue);background:#e5eefb;border:1px solid #c8d9f1;padding:7px 11px;border-radius:10px;white-space:nowrap}
+    .member-kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}.member-kpi{min-width:0;border-radius:17px;padding:15px!important}.member-due-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.member-due-grid .due-card{min-width:0}.member-due-grid .due-card.monthly{grid-column:1/-1}.member-recent-panel{margin-top:16px}
+    .member-kpi-value{overflow-wrap:anywhere}
+    @media(max-width:1100px){.admin-kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.admin-analytics-grid{grid-template-columns:1fr}}
+    @media(max-width:600px){.admin-hero{padding:17px;border-radius:17px}.admin-hero h2{font-size:19px}.admin-kpi-grid{gap:9px}.admin-kpi{padding:13px;border-radius:15px}.admin-kpi-value{font-size:18px}.admin-mini-grid{grid-template-columns:1fr}.donut-layout{gap:12px}.donut{width:118px;height:118px}.donut:before{inset:15px}.member-profile-hero{gap:10px;padding:13px}.member-profile-hero .avatar-photo,.member-profile-hero .avatar-fallback{width:58px;height:58px}.member-profile-copy h2{font-size:16px}.member-profile-id{font-size:10px;padding:6px 8px}.member-due-grid{grid-template-columns:1fr}.member-due-grid .due-card.monthly{grid-column:auto}.member-kpi{padding:12px!important}.member-kpi-value{font-size:19px!important}}
+
     /* Responsive Media Queries (Concept 1 Mobile vs Desktop Switch) */
     @media (max-width: 900px) {
       .sidebar { display: none !important; }
@@ -607,18 +628,12 @@
       const hasPhoto = Boolean(p.Photo_URL && p.Photo_URL.trim());
 
       if (sec === 'home') {
-        const approved = (r.payments || []).filter(x => String(x.Status).toUpperCase() === 'APPROVED');
-        const chartItems = approved.slice(0, 6).reverse();
-        const maxChart = Math.max(1, ...chartItems.map(x => Number(x.Amount || 0)));
-        const chartHtml = chartItems.length ? chartItems.map(x =>
-          '<div class="member-chart-col"><div class="member-chart-value">' + money(x.Amount || 0) + '</div><div class="member-chart-bar" style="height:' + Math.max(5, (Number(x.Amount || 0) / maxChart) * 112) + 'px;"></div><div class="member-chart-label">' + esc((x.For_Month || x.Payment_Date || '').toString().slice(0, 12)) + '</div></div>'
-        ).join('') : '<div class="member-empty">এখনো অনুমোদিত জমার তথ্য নেই</div>';
         const recentHtml = (r.payments || []).slice(0, 5).map(x =>
           '<div class="member-recent-row"><div><div class="member-recent-name">' + esc(x.Payment_Type === 'MONTHLY' ? 'মাসিক জমা' : x.Payment_Type === 'EXTRA' ? 'অতিরিক্ত জমা' : x.Payment_Type === 'INSTALLMENT' ? 'করজে হাসানা' : x.Payment_Type) + '</div><div class="member-recent-date">' + esc(x.Payment_Date || x.Submitted_At || '-') + '</div></div><b>' + money(x.Amount || 0) + '</b><span class="status-badge ' + (String(x.Status).toUpperCase() === 'APPROVED' ? 'approved' : '') + '">' + esc(x.Status || '-') + '</span></div>'
         ).join('') || '<div class="member-empty">কোনো পেমেন্ট রেকর্ড পাওয়া যায়নি</div>';
 
         target.innerHTML =
-          '<div class="member-welcome"><div><h2>আসসালামু আলাইকুম, ' + esc(p.Full_Name) + '</h2><p>আপনার সদস্য অ্যাকাউন্টের সারসংক্ষেপ</p></div><span class="member-id-chip">ID: ' + esc(p.Member_ID) + '</span></div>' +
+          '<div class="member-profile-hero">' + memberPhotoHtml(p.Photo_URL, p.Full_Name) + '<div class="member-profile-copy"><h2>আসসালামু আলাইকুম</h2><p style="font-size:15px;font-weight:800;color:var(--ink);">' + esc(p.Full_Name) + '</p><p>আপনার সদস্য অ্যাকাউন্টের সারসংক্ষেপ</p></div><span class="member-profile-id">ID: ' + esc(p.Member_ID) + '</span></div>' +
           '<div class="member-kpi-grid">' +
             '<div class="member-kpi due"><div class="member-kpi-top"><span class="member-kpi-icon">📅</span>বকেয়া মাসিক পেমেন্ট</div><div class="member-kpi-value">' + (dues.monthly.isPaid ? '৳ ০' : money(dues.monthly.amount)) + '</div><div class="member-kpi-top">' + (dues.monthly.isPaid ? 'সব মাসিক পেমেন্ট পরিশোধিত' : (dues.monthly.monthsCount || 1) + ' মাস বকেয়া') + '</div></div>' +
             '<div class="member-kpi own"><div class="member-kpi-top"><span class="member-kpi-icon">💳</span>আপনার অনুমোদিত জমা</div><div class="member-kpi-value">' + money(r.ownTotal || 0) + '</div><div class="member-kpi-top">আপনার নামে মোট অনুমোদিত</div></div>' +
@@ -631,7 +646,7 @@
             (dues.extra ? '<div class="due-card extra"><div><b style="font-size:14px;color:var(--gold-dark);">অতিরিক্ত জমার ডিউ</b><div style="font-size:22px;font-weight:800;margin:6px 0;color:var(--gold-dark);">' + money(dues.extra.amount) + '</div><div style="font-size:12px;"><b>' + esc(dues.extra.title) + '</b></div><div style="font-size:11px;color:var(--red);margin-top:4px;">শেষ তারিখ: ' + esc(dues.extra.deadline) + '</div></div><button class="btn gold" style="padding:7px 11px;margin-top:10px;font-size:12px;" onclick="quickPay(\'EXTRA\', ' + dues.extra.amount + ', \'\', \'' + esc(dues.extra.demandId) + '\')">জমা দিন</button></div>' : '') +
             (dues.korje ? '<div class="due-card ' + (dues.korje.isPaid ? 'paid' : 'korje') + '"><div><b style="font-size:14px;color:var(--blue);">' + (dues.korje.isPaid ? '✓ ইনস্টলমেন্ট সম্পন্ন' : 'করজে হাসানা ইনস্টলমেন্ট') + '</b><div style="font-size:22px;font-weight:800;margin:6px 0;">' + (dues.korje.isPaid ? '৳ ০' : money(dues.korje.monthlyInstallment)) + '</div><div style="font-size:11px;color:var(--muted);">শেষ তারিখ: ' + esc(dues.korje.deadline || dues.korje.installmentDay) + '</div><div style="font-size:11px;color:var(--blue);font-weight:700;margin-top:4px;">অবশিষ্ট: ' + money(dues.korje.remaining) + '</div></div>' + (!dues.korje.isPaid ? '<button class="btn primary" style="padding:7px 11px;margin-top:10px;font-size:12px;" onclick="quickPay(\'INSTALLMENT\', ' + dues.korje.monthlyInstallment + ', \'\', \'' + esc(dues.korje.korjeId) + '\')">ইনস্টলমেন্ট দিন</button>' : '') + '</div>' : '') +
           '</div>' +
-          '<div class="member-analytics"><div class="member-panel"><h3>📊 আপনার জমার চিত্র <span style="font-size:10px;color:var(--muted);font-weight:400;">(সর্বশেষ ৬টি অনুমোদিত জমা)</span></h3><div class="member-chart">' + chartHtml + '</div></div><div class="member-panel"><h3>🧾 সাম্প্রতিক পেমেন্ট</h3><div class="member-recent-list">' + recentHtml + '</div></div></div>' +
+          '<div class="member-panel member-recent-panel"><h3 style="margin:0 0 12px;color:var(--blue);font-size:16px;">🧾 সাম্প্রতিক পেমেন্ট</h3><div class="member-recent-list">' + recentHtml + '</div></div>' +
           '<div class="member-section-title"><h3>সোসাইটির আর্থিক সারসংক্ষেপ</h3><span>Society overview</span></div>' +
           '<div class="member-kpi-grid" style="grid-template-columns:repeat(2,minmax(0,1fr));">' +
             '<div class="member-kpi"><div class="member-kpi-top"><span class="member-kpi-icon">💰</span>সোসাইটির মোট খরচ</div><div class="member-kpi-value">' + money(r.organizationExpense || 0) + '</div></div>' +
@@ -830,22 +845,7 @@
       document.querySelectorAll('.side-btn, .bnav-item').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
       const content = $('workspaceContent');
 
-      if (tab === 'overview') {
-        const s = APP_DATA.stats;
-        content.innerHTML =
-          '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">' +
-            '<h2 style="margin:0;color:var(--blue);font-size:22px;">' + (APP_DATA.isMasterAdmin ? 'Master Admin ড্যাশবোর্ড' : 'সাব-অ্যাডমিন ড্যাশবোর্ড') + '</h2>' +
-            '<button class="btn ghost" style="padding:6px 14px;font-size:13px;" onclick="loadAdmin()">🔄 রিফ্রেশ</button>' +
-          '</div>' +
-          '<div class="stats">' +
-            '<div class="stat gold"><div class="stat-label">সোসাইটির মোট জমা (তহবিল)</div><div class="stat-value">' + money(s.organizationTotal) + '</div></div>' +
-            '<div class="stat red"><div class="stat-label">সোসাইটির মোট খরচ</div><div class="stat-value">' + money(s.organizationExpense || 0) + '</div></div>' +
-            '<div class="stat green"><div class="stat-label">বর্তমান নিট ব্যালেন্স</div><div class="stat-value" style="color:var(--green);">' + money(s.currentBalance || 0) + '</div></div>' +
-            '<div class="stat"><div class="stat-label">সক্রিয় সদস্য</div><div class="stat-value">' + s.memberCount + ' জন</div></div>' +
-            '<div class="stat"><div class="stat-label">অপেক্ষমাণ পেমেন্ট</div><div class="stat-value">' + s.pendingCount + ' টি</div></div>' +
-          '</div>' +
-          (hasPerm('payments_view') || hasPerm('payments_edit') ? '<div class="card"><h3 style="margin:0 0 14px;color:var(--blue);font-size:18px;">সাম্প্রতিক পেমেন্ট আবেদন</h3>' + paymentTable(APP_DATA.payments.slice(0, 10), true) + '</div>' : '');
-      }
+      if (tab === 'overview') { renderAdminOverview(); }
 
       if (tab === 'payments') content.innerHTML = '<div class="card"><h3 style="margin:0 0 16px;color:var(--blue);">পেমেন্ট আবেদনের তালিকা</h3>' + paymentTable(APP_DATA.payments, true) + '</div>';
       if (tab === 'reports') renderReportsTabInstant();
@@ -858,6 +858,53 @@
       if (tab === 'password') content.innerHTML = adminPasswordResetHtml();
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderAdminOverview() {
+      const s = APP_DATA.stats || {};
+      const members = APP_DATA.members || [];
+      const payments = (APP_DATA.payments || []).filter(p => !p.Archived);
+      const ledger = APP_DATA.ledger || [];
+      const expenses = APP_DATA.expenses || [];
+      const active = members.filter(m => String(m.Status).toUpperCase() === 'ACTIVE');
+      const now = new Date(), year = now.getFullYear(), month = now.getMonth();
+      const monthNames = ['জানু','ফেব্রু','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টে','অক্টো','নভে','ডিসে'];
+      const thisMonth = payments.filter(p => p.Status === 'APPROVED' && p.Payment_Type === 'MONTHLY' && String(p.For_Month || '') === (MONTH_NAMES[month] + ' ' + year));
+      const paidIds = new Set(thisMonth.map(p => String(p.Member_ID)));
+      const paidCount = active.filter(m => paidIds.has(String(m.Member_ID))).length;
+      const dueCount = Math.max(0, active.length - paidCount);
+      const pending = payments.filter(p => p.Status === 'PENDING').length;
+      const approved = payments.filter(p => p.Status === 'APPROVED').length;
+      const totalIn = Number(s.organizationTotal || 0), totalOut = Number(s.organizationExpense || 0);
+      const maxIn = Math.max(1, ...Array.from({length:6},(_,i)=>{const d=new Date(year,month-5+i,1);return ledger.filter(x=>x.Year===d.getFullYear()&&x.Month===d.getMonth()).reduce((a,x)=>a+Number(x.Amount||0),0)}));
+      const monthlyBars = Array.from({length:6},(_,i)=>{const d=new Date(year,month-5+i,1);const v=ledger.filter(x=>x.Year===d.getFullYear()&&x.Month===d.getMonth()).reduce((a,x)=>a+Number(x.Amount||0),0);return {label:monthNames[d.getMonth()],value:v};});
+      const monthlyChart = monthlyBars.map(x=>'<div class="bar-item"><span class="bar-value">'+(x.value?money(x.value):'—')+'</span><div class="bar-fill" style="height:'+Math.max(3,x.value/maxIn*145)+'px"></div><span class="bar-label">'+x.label+'</span></div>').join('');
+      const payRatio = active.length ? Math.round(paidCount/active.length*100) : 0;
+      const pendingRatio = active.length ? Math.round(dueCount/active.length*100) : 0;
+      const expCats = {}; expenses.forEach(e=>{const k=e.Category||'অন্যান্য';expCats[k]=(expCats[k]||0)+Number(e.Amount||0)});
+      const cats = Object.entries(expCats).sort((a,b)=>b[1]-a[1]).slice(0,5), maxCat=Math.max(1,...cats.map(x=>x[1]));
+      const catHtml = cats.length ? cats.map(([k,v])=>'<div class="category-row"><div class="category-head"><span>'+esc(k)+'</span><b>'+money(v)+'</b></div><div class="mini-track"><span style="width:'+(v/maxCat*100)+'%;background:linear-gradient(90deg,#d7a936,#a97810)"></span></div></div>').join('') : '<p class="admin-chart-sub">এখনো খরচের তথ্য নেই</p>';
+      const payTypes = {MONTHLY:0,EXTRA:0,INSTALLMENT:0}; payments.filter(p=>p.Status==='APPROVED').forEach(p=>{if(payTypes[p.Payment_Type]!==undefined)payTypes[p.Payment_Type]+=Number(p.Amount||0)});
+      const allType = Math.max(1,...Object.values(payTypes));
+      const typeHtml = [['মাসিক জমা',payTypes.MONTHLY],['অতিরিক্ত জমা',payTypes.EXTRA],['করজে হাসানা',payTypes.INSTALLMENT]].map(([k,v],i)=>'<div class="category-row"><div class="category-head"><span>'+k+'</span><b>'+money(v)+'</b></div><div class="mini-track"><span style="width:'+(v/allType*100)+'%;background:'+(i===1?'linear-gradient(90deg,#e9c76b,#b58a21)':'linear-gradient(90deg,#55a6e8,#16457f)')+'"></span></div></div>').join('');
+      const recent = payments.slice(0,7);
+      $('workspaceContent').innerHTML =
+        '<div class="admin-hero"><div><h2>'+(APP_DATA.isMasterAdmin?'Master Admin Dashboard':'Sub-Admin Dashboard')+'</h2><p>সোসাইটির আর্থিক অবস্থা ও সদস্যদের পেমেন্টের এক নজরের চিত্র</p></div><button class="btn ghost" style="background:#ffffff18;color:#fff;border-color:#ffffff55" onclick="loadAdmin()">↻ রিফ্রেশ</button></div>'+
+        '<div class="admin-kpi-grid">'+
+          '<div class="admin-kpi" style="--tint:#e8f2ff"><div class="admin-kpi-label">মোট তহবিল জমা</div><div class="admin-kpi-value">'+money(totalIn)+'</div><div class="admin-kpi-note">অনুমোদিত ও পোস্টেড জমা</div></div>'+
+          '<div class="admin-kpi" style="--tint:#fff0ed"><div class="admin-kpi-label">মোট খরচ</div><div class="admin-kpi-value" style="color:#bd423b">'+money(totalOut)+'</div><div class="admin-kpi-note">রেকর্ডকৃত ব্যয়</div></div>'+
+          '<div class="admin-kpi" style="--tint:#e9f8ef"><div class="admin-kpi-label">বর্তমান ব্যালেন্স</div><div class="admin-kpi-value" style="color:#16804d">'+money(s.currentBalance||0)+'</div><div class="admin-kpi-note">জমা থেকে খরচ বাদে</div></div>'+
+          '<div class="admin-kpi" style="--tint:#fff6df"><div class="admin-kpi-label">সক্রিয় সদস্য</div><div class="admin-kpi-value">'+active.length+' জন</div><div class="admin-kpi-note">মোট সদস্য '+members.length+' জন</div></div>'+
+          '<div class="admin-kpi" style="--tint:#fff0e2"><div class="admin-kpi-label">এই মাসে পেমেন্ট দিয়েছেন</div><div class="admin-kpi-value" style="color:#16804d">'+paidCount+' জন</div><div class="admin-kpi-note">মাসিক পেমেন্ট পরিশোধিত</div></div>'+
+          '<div class="admin-kpi" style="--tint:#fff0ed"><div class="admin-kpi-label">এই মাসে বকেয়া সদস্য</div><div class="admin-kpi-value" style="color:#bd423b">'+dueCount+' জন</div><div class="admin-kpi-note">সক্রিয় সদস্যের মধ্যে</div></div>'+
+          '<div class="admin-kpi" style="--tint:#fff6df"><div class="admin-kpi-label">অপেক্ষমাণ আবেদন</div><div class="admin-kpi-value" style="color:#a87812">'+pending+' টি</div><div class="admin-kpi-note">অনুমোদনের অপেক্ষায়</div></div>'+
+          '<div class="admin-kpi" style="--tint:#e8f2ff"><div class="admin-kpi-label">অনুমোদিত পেমেন্ট</div><div class="admin-kpi-value">'+approved+' টি</div><div class="admin-kpi-note">মোট অনুমোদিত আবেদন</div></div>'+
+        '</div>'+
+        '<div class="admin-alert"><div><b>📌 '+MONTH_NAMES[month]+' '+year+' মাসের পেমেন্ট অবস্থা</b><div style="font-size:12px;color:#856b36">'+paidCount+' জন পরিশোধ করেছেন · '+dueCount+' জন বকেয়া</div></div><div style="font-size:24px;font-weight:800;color:#855d0a">'+payRatio+'%</div></div>'+
+        '<div class="admin-analytics-grid"><div class="admin-chart-card"><h3 class="admin-chart-title">📈 গত ৬ মাসের জমার প্রবণতা <span class="admin-chart-sub">Ledger ভিত্তিক</span></h3><div class="bar-chart">'+monthlyChart+'</div></div>'+
+        '<div class="admin-chart-card"><h3 class="admin-chart-title">👥 মাসিক পেমেন্ট অগ্রগতি</h3><div class="donut-layout"><div class="donut" style="--paid:'+payRatio+'%;--pending:'+(payRatio+pendingRatio)+'%"><div class="donut-center"><strong>'+payRatio+'%</strong><span>পরিশোধ হার</span></div></div><div class="legend"><div class="legend-row"><i class="legend-dot" style="background:#188653"></i>পরিশোধ করেছেন <b>'+paidCount+' জন</b></div><div class="legend-row"><i class="legend-dot" style="background:#e9b84d"></i>বকেয়া <b>'+dueCount+' জন</b></div><div class="legend-row"><i class="legend-dot" style="background:#e7edf5"></i>সক্রিয় সদস্য <b>'+active.length+' জন</b></div></div></div></div></div>'+
+        '<div class="admin-mini-grid"><div class="admin-chart-card"><h3 class="admin-chart-title">💸 খরচের খাতভিত্তিক চিত্র</h3>'+catHtml+'</div><div class="admin-chart-card"><h3 class="admin-chart-title">💰 জমার ধরন অনুযায়ী মোট</h3>'+typeHtml+'</div></div>'+
+        '<div class="admin-chart-card"><h3 class="admin-chart-title">🧾 সাম্প্রতিক পেমেন্ট আবেদন <span class="admin-chart-sub">সর্বশেষ ৭টি</span></h3>'+(recent.length?paymentTable(recent,true):'<p class="admin-chart-sub">কোনো পেমেন্ট রেকর্ড নেই</p>')+'</div>';
     }
 
     // Reports
