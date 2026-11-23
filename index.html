@@ -317,7 +317,12 @@
       .member-kpi-grid{gap:8px;margin:10px 0 14px}.member-kpi{min-height:100px;padding:11px;border-radius:13px}
       .member-kpi-top{font-size:10px;gap:6px}.member-kpi-icon{width:27px;height:27px;font-size:14px;border-radius:8px}
       .member-kpi-value{font-size:17px}.member-due-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-      .member-due-grid .due-card{padding:11px;min-height:136px}.member-due-grid .due-card b{font-size:12px!important}
+      .member-due-grid .due-card{padding:11px;min-height:136px}
+      /* Mobile: Monthly due card full width */
+.member-due-grid .due-card.monthly{
+    grid-column: 1 / -1;
+}
+      .member-due-grid .due-card b{font-size:12px!important}
       .member-due-grid .due-card>div>div:nth-child(2){font-size:18px!important}
       .member-due-grid .btn{font-size:11px!important;padding:7px 9px!important}
       .member-panel{padding:13px;border-radius:14px}.member-chart{height:150px;gap:6px}
