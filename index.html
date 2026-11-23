@@ -2,7 +2,7 @@
 <html lang="bn">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>ITTIHAD TEACHERS' SOCIETY</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,66 +21,123 @@
       --gold-grad: linear-gradient(135deg, #E6C45E 0%, #C59B27 50%, #9A7410 100%);
       --ink: #111E2E;
       --muted: #56687D;
-      --bg: #F5F8FC;
+      --bg: #F3F6FB;
       --card-bg: #FFFFFF;
       --line: #DCE5F2;
       --red: #C5221F;
       --green: #137333;
+      --sidebar-w: 260px;
     }
 
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     html { font-size: 16px; }
     body {
       margin: 0; background: var(--bg); color: var(--ink);
-      font-family: 'Hind Siliguri', sans-serif; line-height: 1.6;
+      font-family: 'Hind Siliguri', sans-serif; line-height: 1.55;
       -webkit-font-smoothing: antialiased;
     }
     button, input, select, textarea { font-family: inherit; font-size: 15px; }
     button { cursor: pointer; }
     .hidden { display: none !important; }
 
+    /* Logo Rules */
     .app-logo-wrap { display: flex; align-items: center; justify-content: center; background: transparent !important; }
     .app-real-logo { display: block; max-width: 100%; height: auto; object-fit: contain; background: transparent !important; }
-    .login-logo-wrap .app-real-logo { max-height: 84px; max-width: 380px; }
-    .nav-logo-wrap .app-real-logo { max-height: 48px; max-width: 270px; }
+    .login-logo-wrap .app-real-logo { max-height: 82px; max-width: 340px; }
+    .nav-logo-wrap .app-real-logo { max-height: 44px; max-width: 240px; }
 
-    /* ক্লিন মেনুবার: বামে লোগো, ডানে লগআউট বাটন (মাঝখানে কোনো টেক্সট নেই) */
-    .topbar {
-      min-height: 76px; background: #FFF; border-bottom: 3px solid var(--gold);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 10px max(24px, calc((100% - 1200px)/2)); position: sticky; top: 0; z-index: 100;
-      box-shadow: 0 4px 16px rgba(15, 44, 89, 0.06);
-    }
-    .container { max-width: 1200px; margin: 32px auto; padding: 0 24px 60px; }
+    /* Login Screen */
     .login-wrap {
       min-height: 100vh; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; padding: 32px 18px;
-      background: radial-gradient(circle at top, #E8F1FC 0%, #F5F8FC 70%);
+      align-items: center; justify-content: center; padding: 28px 18px;
+      background: radial-gradient(circle at top, #E4EFFC 0%, #F3F6FB 70%);
     }
     .login-panel {
-      width: min(100%, 460px); padding: 36px 32px; background: #FFF;
-      border: 1px solid var(--line); border-radius: 22px;
-      box-shadow: 0 16px 40px rgba(15, 44, 89, 0.09); margin-top: 24px;
+      width: min(100%, 440px); padding: 34px 28px; background: #FFF;
+      border: 1px solid var(--line); border-radius: 24px;
+      box-shadow: 0 18px 45px rgba(15, 44, 89, 0.08); margin-top: 24px;
     }
     .login-panel h1 { margin: 0 0 6px; font-size: 26px; font-weight: 700; color: var(--blue); }
-    .card {
-      background: var(--card-bg); border: 1px solid var(--line);
-      border-radius: 20px; padding: 26px; margin-bottom: 24px;
-      box-shadow: 0 6px 20px rgba(15, 44, 89, 0.04);
+
+    /* App Shell Layout (Desktop Sidebar + Topbar + Mobile Bottom Nav) */
+    .topbar {
+      height: 68px; background: #FFF; border-bottom: 2.5px solid var(--gold);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; position: fixed; top: 0; left: 0; right: 0; z-index: 150;
+      box-shadow: 0 4px 14px rgba(15, 44, 89, 0.05);
     }
 
-    label { display: block; font-size: 14px; font-weight: 600; margin: 16px 0 6px; color: #24354A; }
+    .app-shell {
+      display: flex; min-height: 100vh; padding-top: 68px;
+    }
+
+    /* Desktop Left Sidebar */
+    .sidebar {
+      width: var(--sidebar-w); background: #FFF; border-right: 1px solid var(--line);
+      position: fixed; top: 68px; bottom: 0; left: 0; z-index: 120;
+      padding: 20px 14px; overflow-y: auto; display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .side-nav-group { display: flex; flex-direction: column; gap: 6px; }
+    .side-btn {
+      display: flex; align-items: center; gap: 12px; width: 100%; text-align: left;
+      padding: 12px 16px; border: 0; border-radius: 14px; background: transparent;
+      color: #324358; font-weight: 600; font-size: 15px; transition: all 0.2s;
+    }
+    .side-btn:hover { background: var(--blue-soft); color: var(--blue); }
+    .side-btn.active { background: var(--blue); color: #FFF; box-shadow: 0 4px 12px rgba(15, 44, 89, 0.2); }
+    .side-btn.gold-btn { background: var(--gold-grad); color: #FFF; margin-top: 10px; }
+
+    /* Main Workspace */
+    .main-workspace {
+      flex: 1; margin-left: var(--sidebar-w); padding: 28px 32px 60px; max-width: calc(100% - var(--sidebar-w));
+      transition: margin-left .22s ease, max-width .22s ease;
+    }
+    /* Collapsible desktop sidebar */
+    body.sidebar-collapsed { --sidebar-w: 78px; }
+    body.sidebar-collapsed .sidebar { padding: 18px 8px; }
+    body.sidebar-collapsed .side-btn { justify-content: center; padding: 12px 8px; gap: 0; font-size: 0; }
+    body.sidebar-collapsed .side-btn span { font-size: 20px; }
+    body.sidebar-collapsed .sidebar > div:last-child { font-size: 0 !important; }
+    body.sidebar-collapsed .main-workspace { margin-left: var(--sidebar-w); max-width: calc(100% - var(--sidebar-w)); }
+    .sidebar-toggle { display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:11px; border:1px solid var(--line); background:var(--blue-soft); color:var(--blue); font-size:18px; margin-right:12px; }
+    .topbar-left { display:flex; align-items:center; gap:12px; min-width:0; }
+    @media (min-width: 901px) { .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+    /* Mobile Bottom Navigation Bar */
+    .bottom-nav {
+      display: none; position: fixed; bottom: 0; left: 0; right: 0; height: 68px;
+      background: #FFF; border-top: 2px solid var(--gold); z-index: 160;
+      box-shadow: 0 -4px 20px rgba(15, 44, 89, 0.08);
+      justify-content: space-around; align-items: center; padding: 0 6px;
+    }
+    .bnav-item {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      background: transparent; border: 0; color: var(--muted); font-size: 11px; font-weight: 600;
+      padding: 6px 8px; border-radius: 12px; flex: 1; gap: 3px;
+    }
+    .bnav-item span.icon { font-size: 20px; line-height: 1; }
+    .bnav-item.active { color: var(--blue); font-weight: 700; }
+    .bnav-item.active span.icon { transform: scale(1.12); color: var(--gold-dark); }
+
+    /* Cards & UI Elements */
+    .card {
+      background: var(--card-bg); border: 1px solid var(--line);
+      border-radius: 20px; padding: 24px; margin-bottom: 20px;
+      box-shadow: 0 4px 18px rgba(15, 44, 89, 0.035);
+    }
+
+    label { display: block; font-size: 14px; font-weight: 600; margin: 14px 0 6px; color: #24354A; }
     input, select, textarea {
-      display: block; width: 100%; padding: 12px 16px; border: 1.5px solid #CCD8E8;
+      display: block; width: 100%; padding: 12px 15px; border: 1.5px solid #CCD8E8;
       border-radius: 12px; background: #FFF; color: var(--ink); outline: none; transition: 0.2s;
     }
-    input:focus, select:focus, textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(15, 44, 89, 0.12); }
+    input:focus, select:focus, textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(15, 44, 89, 0.1); }
     .input-subtext { font-size: 12px; color: var(--muted); font-weight: normal; margin-top: 4px; }
-    .remember-row { display: flex !important; align-items: center; gap: 10px; font-weight: 500 !important; margin: 16px 0 !important; font-size: 14px; }
+    .remember-row { display: flex !important; align-items: center; gap: 10px; font-weight: 500 !important; margin: 14px 0 !important; font-size: 14px; }
     .remember-row input { width: 18px !important; height: 18px !important; margin: 0 !important; accent-color: var(--blue); }
 
     .btn {
-      border: 0; border-radius: 12px; padding: 12px 22px; font-weight: 700; font-size: 15px;
+      border: 0; border-radius: 12px; padding: 11px 20px; font-weight: 700; font-size: 14px;
       display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: 0.2s;
     }
     .btn.primary { background: var(--blue); color: #FFF; }
@@ -91,151 +148,169 @@
     .btn.ghost { background: transparent; color: var(--blue); border: 1.5px solid var(--line); }
     .btn.full { width: 100%; margin-top: 14px; font-size: 16px; padding: 14px; }
 
-    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin: 22px 0; }
-    .stat { padding: 22px; border-radius: 18px; background: #FFF; border: 1px solid var(--line); border-top: 5px solid var(--blue); }
+    /* Stats & Dues Grids */
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; margin: 18px 0; }
+    .stat { padding: 20px; border-radius: 18px; background: #FFF; border: 1px solid var(--line); border-top: 4px solid var(--blue); }
     .stat.gold { border-top-color: var(--gold); background: #FCFAF4; }
     .stat.red { border-top-color: var(--red); background: #FFF9F9; }
     .stat.green { border-top-color: var(--green); background: #F6FCF7; }
-    .stat-label { font-size: 14px; color: var(--muted); font-weight: 600; }
-    .stat-value { font-size: 28px; font-weight: 700; color: var(--blue); margin-top: 8px; }
+    .stat-label { font-size: 13px; color: var(--muted); font-weight: 600; }
+    .stat-value { font-size: 26px; font-weight: 700; color: var(--blue); margin-top: 6px; }
 
-    /* Dues Display Cards */
-    .dues-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 20px 0; }
+    .dues-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 18px 0; }
     .due-card {
       border-radius: 18px; padding: 20px; background: #FFF; border: 1.5px solid var(--line);
-      box-shadow: 0 6px 18px rgba(15, 44, 89, 0.05); display: flex; flex-direction: column; justify-content: space-between;
+      box-shadow: 0 4px 14px rgba(15, 44, 89, 0.04); display: flex; flex-direction: column; justify-content: space-between;
     }
     .due-card.monthly { border-top: 5px solid #C5221F; background: #FFF8F8; }
     .due-card.extra { border-top: 5px solid #C59B27; background: #FFFDF7; }
     .due-card.korje { border-top: 5px solid #1A4684; background: #F4F8FE; }
     .due-card.paid { border-top: 5px solid #137333; background: #F6FCF7; }
 
-    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 16px; background: #FFF; }
-    table { border-collapse: collapse; width: 100%; min-width: 860px; font-size: 14px; }
-    th, td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--line); }
+    /* Tables */
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: #FFF; }
+    table { border-collapse: collapse; width: 100%; min-width: 780px; font-size: 14px; }
+    th, td { padding: 13px 15px; text-align: left; border-bottom: 1px solid var(--line); }
     th { background: #F7FAFD; color: var(--blue-dark); font-weight: 700; }
     tr:hover td { background: #FAFCFE; }
 
-    .badge { display: inline-block; border-radius: 30px; padding: 5px 12px; font-size: 12px; font-weight: 700; }
+    .badge { display: inline-block; border-radius: 30px; padding: 4px 11px; font-size: 12px; font-weight: 700; }
     .badge.PENDING { background: #FFF4D6; color: #8F5B00; }
     .badge.APPROVED { background: #E6F4EA; color: #137333; }
     .badge.REJECTED { background: #FCE8E6; color: #C5221F; }
     .badge.ACTIVE { background: #E6F4EA; color: #137333; }
     .badge.INACTIVE { background: #F1F3F4; color: #5F6368; }
-
-    .month-badge {
-      display: inline-block; background: #E8F0FE; color: #0F2C59;
-      border: 1.5px solid #A4C2F4; padding: 4px 12px; border-radius: 8px;
-      font-weight: 700; font-size: 14px;
-    }
-
-    .tabs { display: flex; gap: 10px; flex-wrap: wrap; margin: 24px 0; }
-    .tab { border: 1.5px solid var(--line); background: #FFF; color: var(--blue); padding: 11px 18px; border-radius: 12px; font-weight: 700; font-size: 14px; }
-    .tab.active { background: var(--blue); color: #FFF; }
+    .month-badge { display: inline-block; background: #E8F0FE; color: #0F2C59; border: 1px solid #A4C2F4; padding: 3px 10px; border-radius: 8px; font-weight: 700; font-size: 13px; }
 
     .notice-banner {
       background: linear-gradient(135deg, #0F2C59 0%, #173E73 100%);
-      border-left: 6px solid var(--gold); border-radius: 16px; padding: 22px 28px; color: #FFF; margin-bottom: 26px;
+      border-left: 6px solid var(--gold); border-radius: 18px; padding: 20px 24px; color: #FFF; margin-bottom: 22px;
+      box-shadow: 0 8px 24px rgba(15, 44, 89, 0.12);
     }
-    .progress-bar-wrap { width: 100%; height: 22px; background: var(--blue-soft); border-radius: 14px; overflow: hidden; margin: 14px 0 10px; }
-    .progress-bar-fill { height: 100%; background: var(--gold-grad); border-radius: 14px; transition: width 0.4s ease; }
-    .due-trigger-badge { cursor: pointer; background: #FDE8E8; color: var(--red); padding: 8px 16px; border-radius: 14px; font-size: 14px; font-weight: 700; border: 1.5px solid #F8B4B4; }
+    .progress-bar-wrap { width: 100%; height: 20px; background: var(--blue-soft); border-radius: 12px; overflow: hidden; margin: 12px 0 8px; }
+    .progress-bar-fill { height: 100%; background: var(--gold-grad); border-radius: 12px; transition: width 0.4s ease; }
+    .due-trigger-badge { cursor: pointer; background: #FDE8E8; color: var(--red); padding: 8px 14px; border-radius: 12px; font-size: 13px; font-weight: 700; border: 1.5px solid #F8B4B4; display: inline-block; }
 
-    .avatar-photo { width: 68px; height: 68px; border-radius: 50%; object-fit: cover; border: 2.5px solid var(--gold); }
-    .avatar-fallback { width: 68px; height: 68px; border-radius: 50%; background: var(--blue-soft); color: var(--blue); display: grid; place-items: center; font-size: 26px; font-weight: 800; border: 2.5px solid var(--gold); }
-    .profile-row { display: flex; align-items: center; gap: 20px; }
+    .avatar-photo { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 2.5px solid var(--gold); }
+    .avatar-fallback { width: 64px; height: 64px; border-radius: 50%; background: var(--blue-soft); color: var(--blue); display: grid; place-items: center; font-size: 24px; font-weight: 800; border: 2.5px solid var(--gold); }
+    .profile-row { display: flex; align-items: center; gap: 18px; }
 
-    .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; }
+    .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px; }
     .form-grid .wide { grid-column: 1/-1; }
-    .message { font-size: 14px; margin-top: 12px; color: var(--red); font-weight: 600; }
+    .message { font-size: 14px; margin-top: 10px; color: var(--red); font-weight: 600; }
     .message.success-text { color: var(--green); }
 
+    /* Modals & Drawers */
     .modal-overlay {
       position: fixed; inset: 0; z-index: 1000; background: rgba(8, 28, 56, 0.55);
-      backdrop-filter: blur(3px); display: flex; align-items: center; justify-content: center; padding: 20px;
+      backdrop-filter: blur(3px); display: flex; align-items: center; justify-content: center; padding: 16px;
     }
     .modal-box {
-      background: #FFF; border-radius: 20px; max-width: 650px; width: 100%;
-      max-height: 85vh; overflow-y: auto; padding: 28px; border: 1px solid var(--line);
+      background: #FFF; border-radius: 22px; max-width: 620px; width: 100%;
+      max-height: 85vh; overflow-y: auto; padding: 24px; border: 1px solid var(--line);
     }
+    .more-menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .more-menu-btn {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 16px 10px; border-radius: 16px; border: 1.5px solid var(--line);
+      background: #FAFCFE; color: var(--blue); font-weight: 700; font-size: 13px; gap: 6px; text-align: center;
+    }
+    .more-menu-btn span.icon { font-size: 24px; }
+
     .toast {
-      position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+      position: fixed; bottom: 82px; left: 50%; transform: translateX(-50%);
       background: var(--blue-dark); color: #FFF; border: 1.5px solid var(--gold);
-      padding: 14px 28px; border-radius: 35px; z-index: 10000; font-weight: 600;
+      padding: 12px 24px; border-radius: 35px; z-index: 10000; font-weight: 600; font-size: 14px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3); max-width: 90vw; text-align: center;
     }
     .global-loader {
       position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center;
       padding: 20px; background: rgba(8, 28, 56, 0.45); backdrop-filter: blur(3px);
     }
-    .loader-card { min-width: 260px; padding: 30px; border-radius: 22px; background: #FFF; text-align: center; border: 1px solid var(--line); }
+    .loader-card { min-width: 240px; padding: 28px; border-radius: 22px; background: #FFF; text-align: center; border: 1px solid var(--line); }
     .loader-spinner {
-      width: 48px; height: 48px; margin: 0 auto 16px; border: 4px solid var(--blue-soft);
+      width: 44px; height: 44px; margin: 0 auto 14px; border: 4px solid var(--blue-soft);
       border-top-color: var(--blue); border-right-color: var(--gold); border-radius: 50%; animation: its-spin 0.8s linear infinite;
     }
     @keyframes its-spin { to { transform: rotate(360deg); } }
 
-    /* Checkbox & Permissions UI */
-    .member-select-box {
-      border: 1.5px solid #CCD8E8; border-radius: 12px; max-height: 200px;
-      overflow-y: auto; padding: 10px 14px; background: #FFF; margin-top: 6px;
-    }
+    .member-select-box { border: 1.5px solid #CCD8E8; border-radius: 12px; max-height: 200px; overflow-y: auto; padding: 10px 14px; background: #FFF; margin-top: 6px; }
     .member-select-item { display: flex; align-items: center; gap: 10px; padding: 6px 0; border-bottom: 1px solid #F0F4F8; font-size: 14px; }
-    .member-select-item:last-child { border-bottom: 0; }
     .member-select-item input { width: 18px; height: 18px; margin: 0; accent-color: var(--blue); }
 
-    .perm-grid-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 10px; }
-    .perm-grid-table th, .perm-grid-table td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; }
+    .perm-grid-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
+    .perm-grid-table th, .perm-grid-table td { padding: 10px; border-bottom: 1px solid var(--line); text-align: left; }
     .perm-grid-table th { background: #F8FAFE; color: var(--blue); }
-    .perm-grid-table input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--blue); cursor: pointer; }
+    .perm-grid-table input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--blue); }
 
-    @media (max-width: 768px) {
+    /* Responsive Media Queries (Concept 1 Mobile vs Desktop Switch) */
+    @media (max-width: 900px) {
+      .sidebar { display: none !important; }
+      body.sidebar-collapsed { --sidebar-w: 260px; }
+      .sidebar-toggle { display:none !important; }
+      .bottom-nav { display: flex !important; }
+      .main-workspace { margin-left: 0; max-width: 100%; padding: 18px 14px 92px; }
+      .topbar { padding: 0 16px; height: 64px; }
+      .app-shell { padding-top: 64px; }
+      .nav-logo-wrap .app-real-logo { max-height: 36px; max-width: 195px; }
+      .login-logo-wrap .app-real-logo { max-height: 66px; }
       .form-grid { grid-template-columns: 1fr; }
-      .nav-logo-wrap .app-real-logo { max-height: 40px; max-width: 210px; }
-      .login-logo-wrap .app-real-logo { max-height: 68px; }
+      .card { padding: 18px 16px; border-radius: 18px; }
+      .stat-value { font-size: 24px; }
     }
   </style>
 </head>
 <body>
   <div id="app">
-    <!-- Login Screen -->
+    <!-- Login View -->
     <section id="loginView" class="login-wrap">
       <div class="app-logo-wrap login-logo-wrap">
         <img id="loginLogoImg" class="app-real-logo" src="https://lh3.googleusercontent.com/d/1r5oIdwSE-g5kqbn832-oqW30ixJN5pXP" alt="ITTIHAD">
       </div>
       <form id="loginForm" class="login-panel">
         <h1>স্বাগতম</h1>
-        <p style="color:var(--muted);font-size:14px;margin:0 0 20px;">আপনার সদস্য আইডি ও পাসওয়ার্ড দিয়ে ড্যাশবোর্ডে প্রবেশ করুন</p>
+        <p style="color:var(--muted);font-size:14px;margin:0 0 20px;">আপনার সদস্য আইডি ও পাসওয়ার্ড দিয়ে প্রবেশ করুন</p>
         <label>Member ID<input id="loginId" autocomplete="username" required placeholder="উদাহরণ: ITS-101"></label>
         <label>Password<input id="loginPassword" type="password" autocomplete="current-password" required placeholder="পাসওয়ার্ড লিখুন"></label>
         <label class="remember-row"><input id="rememberMe" type="checkbox"> <span>এই ডিভাইসে লগইন মনে রাখুন</span></label>
         <button class="btn primary full" type="submit">প্রবেশ করুন</button>
         <div id="loginMessage" class="message"></div>
       </form>
-      <div style="font-size:13px;color:var(--muted);margin-top:26px;font-weight:600;">
+      <div style="font-size:13px;color:var(--muted);margin-top:24px;font-weight:600;">
         ঐক্যবদ্ধ প্রচেষ্টা • পারস্পরিক কল্যাণ • সমৃদ্ধ ভবিষ্যৎ
       </div>
     </section>
 
-    <!-- App View -->
+    <!-- App Shell (Concept 1: Clean Topbar + Fixed Desktop Sidebar + Mobile Bottom Nav) -->
     <section id="appView" class="hidden">
-      <!-- ক্লিন টপবার: বামে শুধুই লোগো, ডানে শুধুই লগআউট বাটন -->
       <header class="topbar">
+        <div class="topbar-left">
+          <button id="sidebarToggle" class="sidebar-toggle" type="button" title="Sidebar সংকুচিত/প্রসারিত করুন" aria-label="Toggle sidebar">☰</button>
         <div class="app-logo-wrap nav-logo-wrap">
           <img id="navLogoImg" class="app-real-logo" src="https://lh3.googleusercontent.com/d/1r5oIdwSE-g5kqbn832-oqW30ixJN5pXP" alt="Logo">
         </div>
+        </div>
         <div>
-          <button id="logoutBtn" class="btn ghost" style="padding:8px 18px;font-weight:700;">লগআউট</button>
+          <button id="logoutBtn" class="btn ghost" style="padding:7px 16px;font-weight:700;font-size:13px;">লগআউট</button>
         </div>
       </header>
 
-      <main class="container">
-        <div id="noticeBannerArea"></div>
-        <div id="mustChangeNotice" class="card hidden" style="border-left:6px solid var(--gold);background:#FFF9E6;">
-          <b>নিরাপত্তা সতর্কতা:</b> আপনার প্রাথমিক পাসওয়ার্ডটি পরিবর্তন করে একটি নতুন পাসওয়ার্ড সেট করুন।
-        </div>
-        <div id="memberView" class="hidden"></div>
-        <div id="adminView" class="hidden"></div>
-      </main>
+      <div class="app-shell">
+        <!-- Desktop Fixed Sidebar -->
+        <aside id="desktopSidebar" class="sidebar"></aside>
+
+        <!-- Main Content Area -->
+        <main class="main-workspace">
+          <div id="noticeBannerArea"></div>
+          <div id="mustChangeNotice" class="card hidden" style="border-left:6px solid var(--gold);background:#FFF9E6;">
+            <b>নিরাপত্তা সতর্কতা:</b> আপনার প্রাথমিক পাসওয়ার্ডটি পরিবর্তন করে একটি নতুন পাসওয়ার্ড সেট করুন।
+          </div>
+          <div id="workspaceContent"></div>
+        </main>
+      </div>
+
+      <!-- Mobile Bottom Navigation Bar -->
+      <nav id="mobileBottomNav" class="bottom-nav"></nav>
     </section>
   </div>
 
@@ -243,8 +318,8 @@
   <div id="globalLoader" class="global-loader hidden">
     <div class="loader-card">
       <div class="loader-spinner"></div>
-      <b style="color:var(--blue);font-size:17px;">অপেক্ষা করুন</b>
-      <p style="color:var(--muted);font-size:13px;margin:6px 0 0;">অনুরোধ প্রসেস করা হচ্ছে...</p>
+      <b style="color:var(--blue);font-size:16px;">অপেক্ষা করুন</b>
+      <p style="color:var(--muted);font-size:12px;margin:4px 0 0;">অনুরোধ প্রসেস করা হচ্ছে...</p>
     </div>
   </div>
   <div id="toast" class="toast hidden"></div>
@@ -252,9 +327,9 @@
   <!-- Modals -->
   <div id="dueModal" class="modal-overlay hidden">
     <div class="modal-box">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
-        <h3 id="dueModalTitle" style="margin:0;color:var(--blue);font-size:20px;">বকেয়া সদস্যদের তালিকা</h3>
-        <button class="btn ghost" onclick="$('dueModal').classList.add('hidden')">বন্ধ</button>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <h3 style="margin:0;color:var(--blue);font-size:19px;">বকেয়া সদস্যদের তালিকা</h3>
+        <button class="btn ghost" style="padding:6px 12px;" onclick="$('dueModal').classList.add('hidden')">বন্ধ</button>
       </div>
       <div id="dueModalContent"></div>
     </div>
@@ -262,22 +337,32 @@
 
   <div id="reviewModal" class="modal-overlay hidden">
     <div class="modal-box">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
-        <h3 style="margin:0;color:var(--blue);font-size:20px;">পেমেন্ট আবেদন পর্যালোচনা ও অনুমোদন</h3>
-        <button class="btn ghost" onclick="$('reviewModal').classList.add('hidden')">বন্ধ</button>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <h3 style="margin:0;color:var(--blue);font-size:19px;">পেমেন্ট পর্যালোচনা ও অনুমোদন</h3>
+        <button class="btn ghost" style="padding:6px 12px;" onclick="$('reviewModal').classList.add('hidden')">বন্ধ</button>
       </div>
       <div id="reviewModalBody"></div>
     </div>
   </div>
 
-  <!-- 🔑 Permissions Setup Modal for Master Admin -->
   <div id="permissionsModal" class="modal-overlay hidden">
     <div class="modal-box">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
-        <h3 id="permModalTitle" style="margin:0;color:var(--blue);font-size:20px;">অ্যাক্সেস পারমিশন নির্ধারণ</h3>
-        <button class="btn ghost" onclick="$('permissionsModal').classList.add('hidden')">বন্ধ</button>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <h3 style="margin:0;color:var(--blue);font-size:19px;">অ্যাক্সেস পারমিশন নির্ধারণ</h3>
+        <button class="btn ghost" style="padding:6px 12px;" onclick="$('permissionsModal').classList.add('hidden')">বন্ধ</button>
       </div>
       <div id="permModalBody"></div>
+    </div>
+  </div>
+
+  <!-- Mobile "More" Drawer Modal -->
+  <div id="mobileMoreModal" class="modal-overlay hidden" onclick="if(event.target===this)this.classList.add('hidden')">
+    <div class="modal-box" style="margin-top:auto;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+        <h3 style="margin:0;color:var(--blue);font-size:18px;">সকল মেনু ও অপশন</h3>
+        <button class="btn ghost" style="padding:5px 12px;" onclick="$('mobileMoreModal').classList.add('hidden')">বন্ধ</button>
+      </div>
+      <div id="mobileMoreGrid" class="more-menu-grid"></div>
     </div>
   </div>
 
@@ -289,7 +374,8 @@
 
     let SESSION_TOKEN = '';
     let CURRENT_ROLE = '';
-    let USER_PERMISSIONS = ''; // 'ALL' or JSON string of perms
+    let USER_PERMISSIONS = '';
+    let ACTIVE_MODE = 'MEMBER'; // 'MEMBER' or 'ADMIN'
     let APP_DATA = null;
     let ACTIVE_SERVER_CALLS = 0;
     const $ = id => document.getElementById(id);
@@ -308,7 +394,6 @@
       return '<img class="avatar-photo" src="' + esc(url) + '" alt="Photo" referrerpolicy="no-referrer" onerror="this.outerHTML=\'<div class=\\\'avatar-fallback\\\'>' + fallback + '</div>\'">';
     }
 
-    // 🛡️ পারমিশন যাচাইকরণ হেল্পার
     function hasPerm(key) {
       if (CURRENT_ROLE === 'ADMIN' || USER_PERMISSIONS === 'ALL') return true;
       if (!USER_PERMISSIONS) return false;
@@ -329,7 +414,6 @@
       return checkKeys.some(k => hasPerm(k));
     }
 
-    // Universal Runner (Supports both Google Apps Script and GitHub Pages)
     async function callServer(action, ...args) {
       showGlobalLoader();
       if (window.google && google.script && google.script.run) {
@@ -347,8 +431,14 @@
             headers: { 'Content-Type': 'text/plain;charset=utf-8' },
             body: JSON.stringify({ action: action, args: args })
           });
-          const data = await response.json();
+          const raw = await response.text();
           hideGlobalLoader();
+          let data;
+          try { data = JSON.parse(raw); }
+          catch (parseErr) { return { ok: false, message: 'সার্ভারের উত্তর পড়া যাচ্ছে না। Apps Script Web App-এর Deploy/Access সেটিং ও JSON response যাচাই করুন।' }; }
+          if (!response.ok && data && typeof data === 'object') {
+            return { ok: false, message: data.message || ('HTTP সংযোগ সমস্যা (' + response.status + ')') };
+          }
           return data;
         } catch (err) {
           hideGlobalLoader();
@@ -357,7 +447,11 @@
       }
     }
 
-    // Authentication
+    // Desktop sidebar toggle (UI-only; no server or sheet writes)
+    const sidebarToggle = $('sidebarToggle');
+    if (sidebarToggle) sidebarToggle.addEventListener('click', () => document.body.classList.toggle('sidebar-collapsed'));
+
+    // Auth Handlers
     $('loginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       showMessage('loginMessage', '');
@@ -365,11 +459,17 @@
       const pass = $('loginPassword').value;
       const remember = $('rememberMe').checked;
 
-      const r = await callServer('apiLogin', id, pass, remember);
-      if (!r.ok) { showMessage('loginMessage', r.message); return; }
-      if (remember) localStorage.setItem('its_remember_token', r.token);
-      else localStorage.removeItem('its_remember_token');
-      await enterApp(r);
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+      try {
+        const r = await callServer('apiLogin', id, pass, remember);
+        if (!r || !r.ok || !r.token) { showMessage('loginMessage', (r && r.message) || 'লগইন সম্পন্ন হয়নি। সার্ভারের উত্তর যাচাই করুন।'); return; }
+        if (remember) localStorage.setItem('its_remember_token', r.token);
+        else localStorage.removeItem('its_remember_token');
+        await enterApp(r);
+      } catch (err) {
+        showMessage('loginMessage', 'লগইন সংযোগে সমস্যা: ' + (err && err.message ? err.message : 'অনুগ্রহ করে আবার চেষ্টা করুন।'));
+      } finally { if (submitBtn) submitBtn.disabled = false; }
     });
 
     $('logoutBtn').addEventListener('click', async () => {
@@ -390,10 +490,15 @@
       $('loginView').classList.add('hidden');
       $('appView').classList.remove('hidden');
 
-      if (CURRENT_ROLE === 'ADMIN') await loadAdmin();
-      else await loadMember();
+      if (CURRENT_ROLE === 'ADMIN') {
+        ACTIVE_MODE = 'ADMIN';
+        await loadAdmin();
+      } else {
+        ACTIVE_MODE = 'MEMBER';
+        await loadMember();
+      }
 
-      if (r.mustChangePassword) openPasswordForm(true);
+      if (r.mustChangePassword) openMemberSection('password', true);
     }
 
     window.addEventListener('load', async () => {
@@ -407,9 +512,10 @@
     });
 
     // ==========================================
-    // 👤 MEMBER DASHBOARD & SMART 3-LEVEL DUES
+    // 📱 CONCEPT 1: MEMBER NAVIGATION & VIEWS
     // ==========================================
     async function loadMember() {
+      ACTIVE_MODE = 'MEMBER';
       const r = await callServer('apiGetMemberDashboard', SESSION_TOKEN);
       if (!r.ok) { toast(r.message); return; }
       APP_DATA = r;
@@ -419,178 +525,178 @@
         area.innerHTML = '<div class="notice-banner"><span style="background:var(--gold-grad);padding:3px 10px;border-radius:20px;font-size:12px;font-weight:700;">📢 অফিশিয়াল নোটিশ</span><h3 style="margin:8px 0;">' + esc(r.notice.Title) + '</h3><p style="margin:0;color:#E0EBF7;">' + esc(r.notice.Content) + '</p></div>';
       } else { area.innerHTML = ''; }
 
-      $('adminView').classList.add('hidden');
-      const target = $('memberView'); target.classList.remove('hidden');
+      renderMemberNavigation();
+      openMemberSection('home');
+    }
+
+    function renderMemberNavigation() {
+      const showSubAdmin = hasAnyAdminPerm();
+
+      // Desktop Sidebar
+      $('desktopSidebar').innerHTML =
+        '<div class="side-nav-group">' +
+          '<button class="side-btn active" data-sec="home" onclick="openMemberSection(\'home\')"><span>🏠</span> হোম ও ব্যালেন্স</button>' +
+          '<button class="side-btn" data-sec="pay" onclick="openMemberSection(\'pay\')"><span>💳</span> টাকা জমা দিন</button>' +
+          '<button class="side-btn" data-sec="history" onclick="openMemberSection(\'history\')"><span>📜</span> জমার ইতিহাস</button>' +
+          '<button class="side-btn" data-sec="password" onclick="openMemberSection(\'password\')"><span>🔐</span> পাসওয়ার্ড পরিবর্তন</button>' +
+          (showSubAdmin ? '<button class="side-btn gold-btn" onclick="switchToAdminView()"><span>🛡️</span> সাব-অ্যাডমিন প্যানেল</button>' : '') +
+        '</div>' +
+        '<div style="font-size:12px;color:var(--muted);text-align:center;padding-top:16px;border-top:1px solid var(--line);">ITTIHAD TEACHERS\' SOCIETY</div>';
+
+      // Mobile Bottom Nav
+      $('mobileBottomNav').innerHTML =
+        '<button class="bnav-item active" data-sec="home" onclick="openMemberSection(\'home\')"><span class="icon">🏠</span><span>হোম</span></button>' +
+        '<button class="bnav-item" data-sec="pay" onclick="openMemberSection(\'pay\')"><span class="icon">💳</span><span>জমা দিন</span></button>' +
+        '<button class="bnav-item" data-sec="history" onclick="openMemberSection(\'history\')"><span class="icon">📜</span><span>ইতিহাস</span></button>' +
+        (showSubAdmin ?
+          '<button class="bnav-item" onclick="switchToAdminView()"><span class="icon">🛡️</span><span>অ্যাডমিন</span></button>' :
+          '<button class="bnav-item" data-sec="password" onclick="openMemberSection(\'password\')"><span class="icon">🔐</span><span>পাসওয়ার্ড</span></button>');
+    }
+
+    function openMemberSection(sec, forcePass = false) {
+      document.querySelectorAll('.side-btn, .bnav-item').forEach(b => b.classList.toggle('active', b.dataset.sec === sec));
+      const target = $('workspaceContent');
+      const r = APP_DATA;
       const p = r.profile;
       const dues = r.dues || {};
       const hasPhoto = Boolean(p.Photo_URL && p.Photo_URL.trim());
 
-      target.innerHTML =
-        '<div class="card profile-row">' +
-          memberPhotoHtml(p.Photo_URL, p.Full_Name) +
-          '<div style="flex:1;"><b style="font-size:20px;color:var(--blue);">' + esc(p.Full_Name) + '</b><div style="font-size:13px;color:var(--muted);">Member ID: <b>' + esc(p.Member_ID) + '</b> • ' + statusBadge(p.Status) + '</div><div style="font-size:13px;color:var(--muted);">' + esc(p.Mobile || '-') + '</div>' +
-          (hasPhoto ?
-            '<div style="font-size:12px;color:var(--green);font-weight:600;margin-top:6px;">✓ প্রোফাইল ছবি সংরক্ষিত (পরিবর্তনযোগ্য নয়)</div>' :
-            '<div><button class="btn secondary" style="padding:6px 14px;font-size:13px;margin-top:8px;" onclick="uploadOwnPhoto()">📷 ছবি আপলোড করুন</button>' +
-            '<div class="input-subtext" style="color:var(--muted);font-size:11px;">প্রথমবার একবারই ছবি আপলোড করতে পারবেন। পরবর্তীতে পরিবর্তনের জন্য অ্যাডমিনের সাথে যোগাযোগ করুন।</div></div>'
-          ) +
-          '</div></div>' +
+      if (sec === 'home') {
+        target.innerHTML =
+          '<div class="card profile-row">' +
+            memberPhotoHtml(p.Photo_URL, p.Full_Name) +
+            '<div style="flex:1;"><b style="font-size:20px;color:var(--blue);">' + esc(p.Full_Name) + '</b><div style="font-size:13px;color:var(--muted);">Member ID: <b>' + esc(p.Member_ID) + '</b> • ' + statusBadge(p.Status) + '</div><div style="font-size:13px;color:var(--muted);">' + esc(p.Mobile || '-') + '</div>' +
+            (hasPhoto ?
+              '<div style="font-size:12px;color:var(--green);font-weight:600;margin-top:6px;">✓ প্রোফাইল ছবি সংরক্ষিত (পরিবর্তনযোগ্য নয়)</div>' :
+              '<div><button class="btn secondary" style="padding:6px 14px;font-size:13px;margin-top:8px;" onclick="uploadOwnPhoto()">📷 ছবি আপলোড করুন</button>' +
+              '<div class="input-subtext" style="font-size:11px;">প্রথমবার একবারই ছবি আপলোড করতে পারবেন।</div></div>'
+            ) +
+            '</div></div>' +
 
-        '<!-- 🎯 ৩-স্তরের স্মার্ট ডিউ বক্স -->' +
-        '<div class="dues-container">' +
-          '<!-- ১. মাসিক পেমেন্ট ডিউ (নভেম্বর থেকেই কার্যকর ও কিউমুলেটিভ) -->' +
-          '<div class="due-card ' + (dues.monthly.isPaid ? 'paid' : 'monthly') + '">' +
-            '<div>' +
-              '<b style="font-size:16px;' + (dues.monthly.isPaid ? 'color:var(--green);' : 'color:var(--red);') + '">' +
-                (dues.monthly.isPaid ? '✓ সকল মাসিক পেমেন্ট পরিশোধিত' : '🔴 বকেয়া মাসিক পেমেন্ট ডিউ') +
-              '</b>' +
-              '<div style="font-size:24px;font-weight:800;margin:6px 0;">' +
-                (dues.monthly.isPaid ? '৳ ০' : money(dues.monthly.amount)) +
+          '<div class="dues-container">' +
+            '<div class="due-card ' + (dues.monthly.isPaid ? 'paid' : 'monthly') + '">' +
+              '<div>' +
+                '<b style="font-size:15px;' + (dues.monthly.isPaid ? 'color:var(--green);' : 'color:var(--red);') + '">' + (dues.monthly.isPaid ? '✓ সকল মাসিক পেমেন্ট পরিশোধিত' : '🔴 বকেয়া মাসিক পেমেন্ট ডিউ') + '</b>' +
+                '<div style="font-size:24px;font-weight:800;margin:6px 0;">' + (dues.monthly.isPaid ? '৳ ০' : money(dues.monthly.amount)) + '</div>' +
+                '<div style="font-size:12px;color:var(--muted);">' + (dues.monthly.isPaid ? 'কোনো মাসিক ফি বকেয়া নেই' : dues.monthly.monthStr + ' (সময়সীমা: ' + dues.monthly.deadline + ')') + '</div>' +
+                (!dues.monthly.isPaid && dues.monthly.monthsCount > 1 ? '<div style="font-size:12px;color:var(--red);font-weight:700;margin-top:4px;">⚠️ মোট ' + dues.monthly.monthsCount + ' মাসের পেমেন্ট বকেয়া</div>' : '') +
               '</div>' +
-              '<div style="font-size:13px;color:var(--muted);">' +
-                (dues.monthly.isPaid ? 'কোনো মাসিক ফি বকেয়া নেই' : dues.monthly.monthStr + ' (সময়সীমা: ' + dues.monthly.deadline + ')') +
-              '</div>' +
-              (!dues.monthly.isPaid && dues.monthly.monthsCount > 1 ? '<div style="font-size:12px;color:var(--red);font-weight:700;margin-top:4px;">⚠️ মোট ' + dues.monthly.monthsCount + ' মাসের পেমেন্ট বকেয়া রয়েছে</div>' : '') +
+              (!dues.monthly.isPaid ? '<button class="btn danger" style="padding:8px 14px;margin-top:14px;font-size:13px;" onclick="quickPay(\'MONTHLY\', ' + dues.monthly.amount + ')">এখনই পরিশোধ করুন</button>' : '') +
             '</div>' +
-            (!dues.monthly.isPaid ? '<button class="btn danger" style="padding:8px 14px;margin-top:14px;font-size:13px;" onclick="quickPay(\'MONTHLY\', ' + dues.monthly.amount + ')">এখনই পরিশোধ করুন</button>' : '') +
+
+            (dues.extra ? 
+              '<div class="due-card extra">' +
+                '<div>' +
+                  '<b style="font-size:15px;color:var(--gold-dark);">🟠 অতিরিক্ত জমার ডিউ</b>' +
+                  '<div style="font-size:24px;font-weight:800;margin:6px 0;color:var(--gold-dark);">' + money(dues.extra.amount) + '</div>' +
+                  '<div style="font-size:13px;color:var(--ink);"><b>' + esc(dues.extra.title) + '</b></div>' +
+                  '<div style="font-size:12px;color:var(--red);margin-top:4px;">শেষ তারিখ: <b>' + esc(dues.extra.deadline) + '</b></div>' +
+                '</div>' +
+                '<button class="btn gold" style="padding:8px 14px;margin-top:14px;font-size:13px;" onclick="quickPay(\'EXTRA\', ' + dues.extra.amount + ', \'\', \'' + esc(dues.extra.demandId) + '\')">এখনই পরিশোধ করুন</button>' +
+              '</div>' : '') +
+
+            (dues.korje ?
+              '<div class="due-card ' + (dues.korje.isPaid ? 'paid' : 'korje') + '">' +
+                '<div>' +
+                  '<b style="font-size:15px;color:var(--blue);">' + (dues.korje.isPaid ? '✓ চলতি মাসের ইনস্টলমেন্ট সম্পন্ন' : '🔵 করজে হাসানা ইনস্টলমেন্ট ডিউ') + '</b>' +
+                  '<div style="font-size:24px;font-weight:800;margin:6px 0;">' + (dues.korje.isPaid ? '৳ ০' : money(dues.korje.monthlyInstallment)) + '</div>' +
+                  '<div style="font-size:12px;color:var(--muted);">শেষ তারিখ: প্রতি মাসের ' + esc(dues.korje.installmentDay) + ' তারিখ</div>' +
+                  '<div style="font-size:13px;color:var(--blue);font-weight:700;margin-top:6px;">অবশিষ্ট করজে হাসানা: ' + money(dues.korje.remaining) + '</div>' +
+                '</div>' +
+                (!dues.korje.isPaid ? '<button class="btn primary" style="padding:8px 14px;margin-top:14px;font-size:13px;" onclick="quickPay(\'INSTALLMENT\', ' + dues.korje.monthlyInstallment + ', \'\', \'' + esc(dues.korje.korjeId) + '\')">ইনস্টলমেন্ট জমা দিন</button>' : '') +
+              '</div>' : '') +
           '</div>' +
 
-          '<!-- ২. অতিরিক্ত জমার ডিউ (পরিশোধ না করা পর্যন্ত থাকবে, পরিশোধ হলে চলে যাবে) -->' +
-          (dues.extra ? 
-            '<div class="due-card extra">' +
-              '<div>' +
-                '<b style="font-size:16px;color:var(--gold-dark);">🟠 অতিরিক্ত জমার ডিউ</b>' +
-                '<div style="font-size:24px;font-weight:800;margin:6px 0;color:var(--gold-dark);">' + money(dues.extra.amount) + '</div>' +
-                '<div style="font-size:13px;color:var(--ink);"><b>' + esc(dues.extra.title) + '</b></div>' +
-                '<div style="font-size:12px;color:var(--red);margin-top:4px;">পরিশোধের শেষ তারিখ: <b>' + esc(dues.extra.deadline) + '</b></div>' +
-              '</div>' +
-              '<button class="btn gold" style="padding:8px 14px;margin-top:14px;font-size:13px;" onclick="quickPay(\'EXTRA\', ' + dues.extra.amount + ', \'\', \'' + esc(dues.extra.demandId) + '\')">এখনই পরিশোধ করুন</button>' +
-            '</div>' : '') +
+          '<div class="stats">' +
+            '<div class="stat green"><div class="stat-label">আপনার নিজস্ব অনুমোদিত জমা</div><div class="stat-value">' + money(r.ownTotal) + '</div></div>' +
+            '<div class="stat gold"><div class="stat-label">সোসাইটির মোট জমা (তহবিল)</div><div class="stat-value">' + money(r.organizationTotal) + '</div></div>' +
+            '<div class="stat red"><div class="stat-label">সোসাইটির মোট খরচ</div><div class="stat-value">' + money(r.organizationExpense || 0) + '</div></div>' +
+            '<div class="stat"><div class="stat-label">সোসাইটির বর্তমান ব্যালেন্স</div><div class="stat-value" style="color:var(--green);">' + money(r.currentBalance || 0) + '</div></div>' +
+          '</div>';
+      }
 
-          '<!-- ৩. করজে হাসানা ইনস্টলমেন্ট ডিউ -->' +
-          (dues.korje ?
-            '<div class="due-card ' + (dues.korje.isPaid ? 'paid' : 'korje') + '">' +
-              '<div>' +
-                '<b style="font-size:16px;color:var(--blue);">' + (dues.korje.isPaid ? '✓ চলতি মাসের ইনস্টলমেন্ট সম্পন্ন' : '🔵 করজে হাসানা ইনস্টলমেন্ট ডিউ') + '</b>' +
-                '<div style="font-size:24px;font-weight:800;margin:6px 0;">' + (dues.korje.isPaid ? '৳ ০' : money(dues.korje.monthlyInstallment)) + '</div>' +
-                '<div style="font-size:13px;color:var(--muted);">শেষ তারিখ: প্রতি মাসের ' + esc(dues.korje.installmentDay) + ' তারিখ</div>' +
-                '<div style="font-size:13px;color:var(--blue);font-weight:700;margin-top:6px;">অবশিষ্ট করজে হাসানা: ' + money(dues.korje.remaining) + '</div>' +
-              '</div>' +
-              (!dues.korje.isPaid ? '<button class="btn primary" style="padding:8px 14px;margin-top:14px;font-size:13px;" onclick="quickPay(\'INSTALLMENT\', ' + dues.korje.monthlyInstallment + ', \'\', \'' + esc(dues.korje.korjeId) + '\')">ইনস্টলমেন্ট জমা দিন</button>' : '') +
-            '</div>' : '') +
-        '</div>' +
+      if (sec === 'pay') {
+        const now = new Date();
+        const currentYear = now.getFullYear();
+        const currentMonthIdx = now.getMonth();
+        const todayStr = now.toISOString().split('T')[0];
 
-        '<!-- 💰 আর্থিক ফান্ড ও ব্যালেন্স বিবরণী -->' +
-        '<div class="stats">' +
-          '<div class="stat green"><div class="stat-label">আপনার নিজস্ব অনুমোদিত জমা</div><div class="stat-value">' + money(r.ownTotal) + '</div></div>' +
-          '<div class="stat gold"><div class="stat-label">সোসাইটির মোট জমা (তহবিল)</div><div class="stat-value">' + money(r.organizationTotal) + '</div></div>' +
-          '<div class="stat red"><div class="stat-label">সোসাইটির মোট খরচ</div><div class="stat-value">' + money(r.organizationExpense || 0) + '</div></div>' +
-          '<div class="stat"><div class="stat-label">সোসাইটির বর্তমান ব্যালেন্স</div><div class="stat-value" style="color:var(--green);">' + money(r.currentBalance || 0) + '</div></div>' +
-        '</div>' +
+        target.innerHTML =
+          '<div class="card" style="border-top:5px solid var(--blue);">' +
+            '<h3 style="margin:0 0 16px;color:var(--blue);">নতুন পেমেন্ট আবেদন</h3>' +
+            '<form id="paymentSubmitForm" class="form-grid">' +
+              '<label>পেমেন্টের ধরণ' +
+                '<select name="paymentType" id="payTypeSelect" onchange="togglePaymentTypeFields(\'member\')" required>' +
+                  '<option value="MONTHLY">মাসিক পেমেন্ট (৫,০০০ ৳)</option>' +
+                  '<option value="EXTRA">সাধারণ বা অতিরিক্ত জমা</option>' +
+                  '<option value="INSTALLMENT">ইনস্টলমেন্ট (করজে হাসানা)</option>' +
+                '</select>' +
+              '</label>' +
+              '<label>জমার পরিমাণ (৳)<input name="amount" id="payAmountInput" type="number" step="0.01" min="1" value="5000" required></label>' +
+              '<label id="memberForMonthGroup">কোন মাসের পেমেন্ট' +
+                '<div style="display:flex;gap:8px;margin-top:6px;">' +
+                  '<select id="payMonthSelect" style="margin-top:0;">' + MONTH_NAMES.map((m, idx) => '<option value="' + m + '" ' + (idx === currentMonthIdx ? 'selected' : '') + '>' + m + '</option>').join('') + '</select>' +
+                  '<select id="payYearSelect" style="margin-top:0;">' + [currentYear-1, currentYear, currentYear+1, currentYear+2].map(y => '<option value="' + y + '" ' + (y === currentYear ? 'selected' : '') + '>' + y + ' সাল</option>').join('') + '</select>' +
+                '</div>' +
+              '</label>' +
+              '<label>পেমেন্ট মেথড<select name="method" required><option value="">সিলেক্ট করুন</option><option value="bKash">bKash</option><option value="Nagad">Nagad</option><option value="Rocket">Rocket</option><option value="Bank">Bank Deposit</option><option value="Cash">Cash (নগদ)</option></select></label>' +
+              '<label class="wide">Transaction ID / রসিদ নম্বর<input name="transactionId" required placeholder="যেমন: TR984X72"></label>' +
+              '<label>টাকা পাঠানোর তারিখ<input name="paymentDate" type="date" value="' + todayStr + '" max="' + todayStr + '" required></label>' +
+              '<input type="hidden" name="refId" id="payRefIdHidden">' +
+              '<div class="wide" style="margin-top:14px;"><button class="btn primary full" type="submit">আবেদন সম্পন্ন করুন</button><div id="paymentFormMsg" class="message"></div></div>' +
+            '</form>' +
+          '</div>';
 
-        '<div style="display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap;align-items:center;">' +
-          '<button class="btn primary" onclick="openPaymentForm()">＋ নতুন পেমেন্ট আবেদন করুন</button>' +
-          '<button class="btn secondary" onclick="openPasswordForm(false)">পাসওয়ার্ড পরিবর্তন</button>' +
-          (hasAnyAdminPerm() ? '<button class="btn gold" style="padding:10px 18px;" onclick="switchToAdminView()">🛡️ সাব-অ্যাডমিন প্যানেল</button>' : '') +
-        '</div>' +
-        '<div id="memberFormArea"></div>' +
-        '<div class="card"><h3 style="margin:0 0 16px;color:var(--blue);">আপনার জমার ইতিহাস</h3>' + paymentTable(r.payments, false) + '</div>';
-    }
+        $('paymentSubmitForm').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const f = new FormData(e.target);
+          const pType = $('payTypeSelect').value;
+          const payload = Object.fromEntries(f);
+          payload.forMonth = pType === 'MONTHLY' ? ($('payMonthSelect').value.trim() + ' ' + $('payYearSelect').value.trim()) : (pType === 'INSTALLMENT' ? 'ইনস্টলমেন্ট' : 'সাধারণ জমা');
+          const res = await callServer('apiSubmitPayment', SESSION_TOKEN, payload);
+          showMessage('paymentFormMsg', res.message, res.ok);
+          if (res.ok) { toast(res.message); setTimeout(() => loadMember(), 1200); }
+        });
+      }
 
-    function switchToAdminView() {
-      $('memberView').classList.add('hidden');
-      loadAdmin();
-    }
-    function switchToMemberView() {
-      $('adminView').classList.add('hidden');
-      loadMember();
-    }
+      if (sec === 'history') {
+        target.innerHTML = '<div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><h3 style="margin:0;color:var(--blue);">আপনার জমার ইতিহাস</h3><button class="btn ghost" style="padding:6px 12px;" onclick="loadMember()">🔄 রিফ্রেশ</button></div>' + paymentTable(r.payments, false) + '</div>';
+      }
 
-    // মেম্বার প্রথমবার ছবি আপলোড
-    async function uploadOwnPhoto() {
-      const picker = document.createElement('input');
-      picker.type = 'file';
-      picker.accept = 'image/jpeg,image/png,image/webp';
-      picker.onchange = async () => {
-        const file = picker.files && picker.files[0];
-        if (!file) return;
-        if (file.size > 2 * 1024 * 1024) { toast('ছবির সাইজ ২ MB-এর কম হতে হবে।'); return; }
-        const reader = new FileReader();
-        reader.onload = async () => {
-          const r = await callServer('apiMemberUploadPhoto', SESSION_TOKEN, { dataUrl: reader.result });
-          toast(r.message);
-          if (r.ok) loadMember();
-        };
-        reader.readAsDataURL(file);
-      };
-      picker.click();
+      if (sec === 'password') {
+        target.innerHTML =
+          '<div class="card" style="border-top:5px solid var(--gold);">' +
+            '<h3 style="margin:0 0 16px;color:var(--blue);">পাসওয়ার্ড পরিবর্তন করুন</h3>' +
+            '<form id="userPassChangeForm" class="form-grid">' +
+              '<label>বর্তমান পাসওয়ার্ড<input name="oldPassword" type="password" required></label>' +
+              '<label>নতুন পাসওয়ার্ড (কমপক্ষে ১০ অক্ষর)<input name="newPassword" type="password" minlength="10" required></label>' +
+              '<div class="wide" style="margin-top:14px;"><button class="btn primary" type="submit">পাসওয়ার্ড আপডেট করুন</button><div id="passChangeMsg" class="message"></div></div>' +
+            '</form>' +
+          '</div>';
+
+        $('userPassChangeForm').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const f = new FormData(e.target);
+          const res = await callServer('apiChangePassword', SESSION_TOKEN, f.get('oldPassword'), f.get('newPassword'));
+          showMessage('passChangeMsg', res.message, res.ok);
+          if (res.ok) { toast(res.message); $('mustChangeNotice').classList.add('hidden'); setTimeout(() => openMemberSection('home'), 1500); }
+        });
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function quickPay(type, amount, desc = '', refId = '') {
-      openPaymentForm();
-      const typeEl = $('payTypeSelect');
-      const amtEl = $('payAmountInput');
-      if (typeEl) {
-        typeEl.value = type;
-        togglePaymentTypeFields('member');
-      }
-      if (amtEl && amount > 0) amtEl.value = amount;
-      if (refId && $('payRefIdHidden')) $('payRefIdHidden').value = refId;
-      window.scrollTo({ top: $('memberFormArea').offsetTop - 30, behavior: 'smooth' });
-    }
-
-    function openPaymentForm() {
-      const now = new Date();
-      const currentYear = now.getFullYear();
-      const currentMonthIdx = now.getMonth();
-      const todayStr = now.toISOString().split('T')[0];
-
-      $('memberFormArea').innerHTML =
-        '<div class="card" style="border-top:5px solid var(--blue);">' +
-          '<h3 style="margin:0 0 16px;color:var(--blue);">নতুন পেমেন্ট আবেদন</h3>' +
-          '<form id="paymentSubmitForm" class="form-grid">' +
-            '<label>পেমেন্টের ধরণ' +
-              '<select name="paymentType" id="payTypeSelect" onchange="togglePaymentTypeFields(\'member\')" required>' +
-                '<option value="MONTHLY">মাসিক পেমেন্ট (৫,০০০ ৳)</option>' +
-                '<option value="EXTRA">সাধারণ বা অতিরিক্ত জমা</option>' +
-                '<option value="INSTALLMENT">ইনস্টলমেন্ট (করজে হাসানা)</option>' +
-              '</select>' +
-            '</label>' +
-            
-            '<label>জমার পরিমাণ (৳)<input name="amount" id="payAmountInput" type="number" step="0.01" min="1" value="5000" required></label>' +
-
-            '<label id="memberForMonthGroup">কোন মাসের পেমেন্ট' +
-              '<div style="display:flex;gap:8px;margin-top:6px;">' +
-                '<select id="payMonthSelect" style="margin-top:0;">' + MONTH_NAMES.map((m, idx) => '<option value="' + m + '" ' + (idx === currentMonthIdx ? 'selected' : '') + '>' + m + '</option>').join('') + '</select>' +
-                '<select id="payYearSelect" style="margin-top:0;">' + [currentYear-1, currentYear, currentYear+1, currentYear+2].map(y => '<option value="' + y + '" ' + (y === currentYear ? 'selected' : '') + '>' + y + ' সাল</option>').join('') + '</select>' +
-              '</div>' +
-            '</label>' +
-
-            '<label>পেমেন্ট মেথড<select name="method" required><option value="">সিলেক্ট করুন</option><option value="bKash">bKash</option><option value="Nagad">Nagad</option><option value="Rocket">Rocket</option><option value="Bank">Bank Deposit</option><option value="Cash">Cash (নগদ)</option></select></label>' +
-            '<label class="wide">Transaction ID / রসিদ নম্বর<input name="transactionId" required placeholder="যেমন: TR984X72"></label>' +
-            '<label>টাকা পাঠানোর তারিখ<input name="paymentDate" type="date" value="' + todayStr + '" max="' + todayStr + '" required></label>' +
-            '<input type="hidden" name="refId" id="payRefIdHidden">' +
-            
-            '<div class="wide" style="margin-top:14px;"><button class="btn primary" type="submit">আবেদন সম্পন্ন করুন</button> <button class="btn ghost" type="button" onclick="$(\'memberFormArea\').innerHTML=\'\'">বন্ধ</button><div id="paymentFormMsg" class="message"></div></div>' +
-          '</form>' +
-        '</div>';
-
-      $('paymentSubmitForm').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const f = new FormData(e.target);
-        const pType = $('payTypeSelect').value;
-        const payload = Object.fromEntries(f);
-
-        if (pType === 'MONTHLY') {
-          payload.forMonth = $('payMonthSelect').value.trim() + ' ' + $('payYearSelect').value.trim();
-        } else {
-          payload.forMonth = pType === 'INSTALLMENT' ? 'ইনস্টলমেন্ট' : 'সাধারণ জমা';
+      openMemberSection('pay');
+      setTimeout(() => {
+        const typeEl = $('payTypeSelect');
+        const amtEl = $('payAmountInput');
+        if (typeEl) {
+          typeEl.value = type;
+          togglePaymentTypeFields('member');
         }
-
-        const r = await callServer('apiSubmitPayment', SESSION_TOKEN, payload);
-        showMessage('paymentFormMsg', r.message, r.ok);
-        if (r.ok) { toast(r.message); setTimeout(() => loadMember(), 1200); }
-      });
+        if (amtEl && amount > 0) amtEl.value = amount;
+        if (refId && $('payRefIdHidden')) $('payRefIdHidden').value = refId;
+      }, 50);
     }
 
     function togglePaymentTypeFields(context) {
@@ -612,18 +718,39 @@
       }
     }
 
+    async function uploadOwnPhoto() {
+      const picker = document.createElement('input');
+      picker.type = 'file';
+      picker.accept = 'image/jpeg,image/png,image/webp';
+      picker.onchange = async () => {
+        const file = picker.files && picker.files[0];
+        if (!file) return;
+        if (file.size > 2 * 1024 * 1024) { toast('ছবির সাইজ ২ MB-এর কম হতে হবে।'); return; }
+        const reader = new FileReader();
+        reader.onload = async () => {
+          const r = await callServer('apiMemberUploadPhoto', SESSION_TOKEN, { dataUrl: reader.result });
+          toast(r.message);
+          if (r.ok) loadMember();
+        };
+        reader.readAsDataURL(file);
+      };
+      picker.click();
+    }
+
+    function switchToAdminView() { loadAdmin(); }
+    function switchToMemberView() { loadMember(); }
+
     // ==========================================
-    // 👑 MASTER ADMIN & SUB-ADMIN DASHBOARD
+    // 👑 CONCEPT 1: MASTER ADMIN & SUB-ADMIN APP FLOW
     // ==========================================
     async function loadAdmin() {
+      ACTIVE_MODE = 'ADMIN';
       const r = await callServer('apiGetAdminDashboard', SESSION_TOKEN);
       if (!r.ok) { toast(r.message); return; }
       APP_DATA = r;
 
-      $('memberView').classList.add('hidden');
-      const target = $('adminView'); target.classList.remove('hidden');
+      $('noticeBannerArea').innerHTML = '';
 
-      // Determine available tabs based on permissions
       const canPayments = hasPerm('payments_view') || hasPerm('payments_edit');
       const canReports = hasPerm('reports_view');
       const canExpenses = hasPerm('expenses_view') || hasPerm('expenses_edit');
@@ -634,51 +761,69 @@
       const canDeposit = hasPerm('deposit_edit');
       const canPassword = hasPerm('password_edit');
 
-      // Default active tab selection
-      let defaultTab = canPayments ? 'payments' : (canReports ? 'reports' : (canExpenses ? 'expenses' : (canKorje ? 'korje' : (canDemands ? 'demands' : (canNotices ? 'notices' : (canMembers ? 'members' : (canDeposit ? 'deposit' : 'password')))))));
+      // Desktop Sidebar
+      $('desktopSidebar').innerHTML =
+        '<div class="side-nav-group">' +
+          '<button class="side-btn active" data-tab="overview" onclick="adminTab(\'overview\')"><span>📊</span> ড্যাশবোর্ড হোম</button>' +
+          (canPayments ? '<button class="side-btn" data-tab="payments" onclick="adminTab(\'payments\')"><span>💳</span> পেমেন্ট আবেদন</button>' : '') +
+          (canExpenses ? '<button class="side-btn" data-tab="expenses" onclick="adminTab(\'expenses\')"><span>💸</span> খরচ ব্যবস্থাপনা</button>' : '') +
+          (canReports ? '<button class="side-btn" data-tab="reports" onclick="adminTab(\'reports\')"><span>📈</span> মাসিক/বার্ষিক রিপোর্ট</button>' : '') +
+          (canKorje ? '<button class="side-btn" data-tab="korje" onclick="adminTab(\'korje\')"><span>🤝</span> করজে হাসানা</button>' : '') +
+          (canDemands ? '<button class="side-btn" data-tab="demands" onclick="adminTab(\'demands\')"><span>🎯</span> অতিরিক্ত ডিউ</button>' : '') +
+          (canNotices ? '<button class="side-btn" data-tab="notices" onclick="adminTab(\'notices\')"><span>📢</span> নোটিশ বোর্ড</button>' : '') +
+          (canMembers ? '<button class="side-btn" data-tab="members" onclick="adminTab(\'members\')"><span>👥</span> সদস্য ও পারমিশন</button>' : '') +
+          (canDeposit ? '<button class="side-btn" data-tab="deposit" onclick="adminTab(\'deposit\')"><span>💵</span> সরাসরি জমা</button>' : '') +
+          (canPassword ? '<button class="side-btn" data-tab="password" onclick="adminTab(\'password\')"><span>🔐</span> পাসওয়ার্ড রিসেট</button>' : '') +
+          (!r.isMasterAdmin ? '<button class="side-btn gold-btn" onclick="switchToMemberView()"><span>⬅️</span> মেম্বার মোড</button>' : '') +
+        '</div>' +
+        '<div style="font-size:12px;color:var(--muted);text-align:center;padding-top:16px;border-top:1px solid var(--line);">' + (r.isMasterAdmin ? 'Master Admin' : 'Sub-Admin') + '</div>';
 
-      target.innerHTML =
-        '<div style="margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">' +
-          '<div>' +
-            '<h2 style="margin:0;color:var(--blue);font-size:26px;">' + (r.isMasterAdmin ? 'Master Admin Dashboard' : '🛡️ সাব-অ্যাডমিন প্যানেল') + '</h2>' +
-            '<p style="margin:4px 0 0;color:var(--muted);font-size:14px;">ITTIHAD TEACHERS\' SOCIETY-এর সামগ্রিক আর্থিক হিসাব ও সদস্য ব্যবস্থাপনা</p>' +
-          '</div>' +
-          '<div style="display:flex;gap:10px;">' +
-            (!r.isMasterAdmin ? '<button class="btn secondary" onclick="switchToMemberView()">⬅️ মেম্বার ড্যাশবোর্ড</button>' : '') +
-            '<button class="btn ghost" onclick="loadAdmin()">🔄 রিফ্রেশ ডেটা</button>' +
-          '</div>' +
-        '</div>' +
-        '<!-- 💰 আর্থিক ফান্ড ও ব্যালেন্স সারসংক্ষেপ কার্ড -->' +
-        '<div class="stats">' +
-          '<div class="stat gold"><div class="stat-label">সোসাইটির মোট জমা (তহবিল)</div><div class="stat-value">' + money(r.stats.organizationTotal) + '</div></div>' +
-          '<div class="stat red"><div class="stat-label">সোসাইটির মোট খরচ</div><div class="stat-value">' + money(r.stats.organizationExpense || 0) + '</div></div>' +
-          '<div class="stat green"><div class="stat-label">বর্তমান ব্যালেন্স (ক্যাশ ইন হ্যান্ড)</div><div class="stat-value" style="color:var(--green);">' + money(r.stats.currentBalance || 0) + '</div></div>' +
-          '<div class="stat"><div class="stat-label">মোট সক্রিয় সদস্য</div><div class="stat-value">' + r.stats.memberCount + ' জন</div></div>' +
-          '<div class="stat"><div class="stat-label">অপেক্ষমাণ আবেদন</div><div class="stat-value">' + r.stats.pendingCount + ' টি</div></div>' +
-        '</div>' +
-        '<div class="tabs">' +
-          (canPayments ? '<button class="tab active" data-tab="payments" onclick="adminTab(\'payments\')">পেমেন্ট আবেদন</button>' : '') +
-          (canReports ? '<button class="tab" data-tab="reports" onclick="adminTab(\'reports\')">📊 মাসিক ও বাৎসরিক রিপোর্ট</button>' : '') +
-          (canExpenses ? '<button class="tab" data-tab="expenses" onclick="adminTab(\'expenses\')">💸 খরচ ব্যবস্থাপনা</button>' : '') +
-          (canKorje ? '<button class="tab" data-tab="korje" onclick="adminTab(\'korje\')">🤝 করজে হাসানা ও ইনস্টলমেন্ট</button>' : '') +
-          (canDemands ? '<button class="tab" data-tab="demands" onclick="adminTab(\'demands\')">🎯 অতিরিক্ত জমার ডিউ জারি</button>' : '') +
-          (canNotices ? '<button class="tab" data-tab="notices" onclick="adminTab(\'notices\')">📢 নোটিশ বোর্ড</button>' : '') +
-          (canMembers ? '<button class="tab" data-tab="members" onclick="adminTab(\'members\')">সদস্য তালিকা</button>' : '') +
-          (canDeposit ? '<button class="tab" data-tab="deposit" onclick="adminTab(\'deposit\')">সরাসরি জমা (Manual)</button>' : '') +
-          (canPassword ? '<button class="tab" data-tab="password" onclick="adminTab(\'password\')">পাসওয়ার্ড রিসেট</button>' : '') +
-        '</div>' +
-        '<div id="adminFormArea"></div>' +
-        '<div id="adminTabContent"></div>';
+      // Mobile Bottom Nav (Core 5 Actions + "More" Sheet)
+      $('mobileBottomNav').innerHTML =
+        '<button class="bnav-item active" data-tab="overview" onclick="adminTab(\'overview\')"><span class="icon">📊</span><span>হোম</span></button>' +
+        (canPayments ? '<button class="bnav-item" data-tab="payments" onclick="adminTab(\'payments\')"><span class="icon">💳</span><span>পেমেন্ট</span></button>' : '') +
+        (canExpenses ? '<button class="bnav-item" data-tab="expenses" onclick="adminTab(\'expenses\')"><span class="icon">💸</span><span>খরচ</span></button>' : '') +
+        (canMembers ? '<button class="bnav-item" data-tab="members" onclick="adminTab(\'members\')"><span class="icon">👥</span><span>সদস্য</span></button>' : '') +
+        '<button class="bnav-item" onclick="openMobileMoreSheet()"><span class="icon">☰</span><span>আরও</span></button>';
 
-      adminTab(defaultTab);
+      // Populate Mobile "More" Drawer Grid
+      $('mobileMoreGrid').innerHTML =
+        (canReports ? '<button class="more-menu-btn" onclick="adminTab(\'reports\');$(\'mobileMoreModal\').classList.add(\'hidden\')"><span class="icon">📈</span>মাসিক/বার্ষিক রিপোর্ট</button>' : '') +
+        (canKorje ? '<button class="more-menu-btn" onclick="adminTab(\'korje\');$(\'mobileMoreModal\').classList.add(\'hidden\')"><span class="icon">🤝</span>করজে হাসানা</button>' : '') +
+        (canDemands ? '<button class="more-menu-btn" onclick="adminTab(\'demands\');$(\'mobileMoreModal\').classList.add(\'hidden\')"><span class="icon">🎯</span>অতিরিক্ত ডিউ</button>' : '') +
+        (canNotices ? '<button class="more-menu-btn" onclick="adminTab(\'notices\');$(\'mobileMoreModal\').classList.add(\'hidden\')"><span class="icon">📢</span>নোটিশ বোর্ড</button>' : '') +
+        (canDeposit ? '<button class="more-menu-btn" onclick="adminTab(\'deposit\');$(\'mobileMoreModal\').classList.add(\'hidden\')"><span class="icon">💵</span>সরাসরি জমা</button>' : '') +
+        (canPassword ? '<button class="more-menu-btn" onclick="adminTab(\'password\');$(\'mobileMoreModal\').classList.add(\'hidden\')"><span class="icon">🔐</span>পাসওয়ার্ড রিসেট</button>' : '') +
+        (!r.isMasterAdmin ? '<button class="more-menu-btn" style="background:var(--gold-light);" onclick="switchToMemberView();$(\'mobileMoreModal\').classList.add(\'hidden\')"><span class="icon">⬅️</span>মেম্বার মোড</button>' : '') +
+        '<button class="more-menu-btn" onclick="loadAdmin();$(\'mobileMoreModal\').classList.add(\'hidden\')"><span class="icon">🔄</span>রিফ্রেশ ডেটা</button>';
+
+      adminTab('overview');
     }
 
-    function adminTab(tab) {
-      document.querySelectorAll('.tab').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
-      $('adminFormArea').innerHTML = '';
-      const content = $('adminTabContent');
+    function openMobileMoreSheet() { $('mobileMoreModal').classList.remove('hidden'); }
 
-      if (tab === 'payments') content.innerHTML = adminPaymentsHtml();
+    function adminTab(tab) {
+      document.querySelectorAll('.side-btn, .bnav-item').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+      const content = $('workspaceContent');
+
+      if (tab === 'overview') {
+        const s = APP_DATA.stats;
+        content.innerHTML =
+          '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">' +
+            '<h2 style="margin:0;color:var(--blue);font-size:22px;">' + (APP_DATA.isMasterAdmin ? 'Master Admin ড্যাশবোর্ড' : 'সাব-অ্যাডমিন ড্যাশবোর্ড') + '</h2>' +
+            '<button class="btn ghost" style="padding:6px 14px;font-size:13px;" onclick="loadAdmin()">🔄 রিফ্রেশ</button>' +
+          '</div>' +
+          '<div class="stats">' +
+            '<div class="stat gold"><div class="stat-label">সোসাইটির মোট জমা (তহবিল)</div><div class="stat-value">' + money(s.organizationTotal) + '</div></div>' +
+            '<div class="stat red"><div class="stat-label">সোসাইটির মোট খরচ</div><div class="stat-value">' + money(s.organizationExpense || 0) + '</div></div>' +
+            '<div class="stat green"><div class="stat-label">বর্তমান নিট ব্যালেন্স</div><div class="stat-value" style="color:var(--green);">' + money(s.currentBalance || 0) + '</div></div>' +
+            '<div class="stat"><div class="stat-label">সক্রিয় সদস্য</div><div class="stat-value">' + s.memberCount + ' জন</div></div>' +
+            '<div class="stat"><div class="stat-label">অপেক্ষমাণ পেমেন্ট</div><div class="stat-value">' + s.pendingCount + ' টি</div></div>' +
+          '</div>' +
+          (hasPerm('payments_view') || hasPerm('payments_edit') ? '<div class="card"><h3 style="margin:0 0 14px;color:var(--blue);font-size:18px;">সাম্প্রতিক পেমেন্ট আবেদন</h3>' + paymentTable(APP_DATA.payments.slice(0, 10), true) + '</div>' : '');
+      }
+
+      if (tab === 'payments') content.innerHTML = '<div class="card"><h3 style="margin:0 0 16px;color:var(--blue);">পেমেন্ট আবেদনের তালিকা</h3>' + paymentTable(APP_DATA.payments, true) + '</div>';
       if (tab === 'reports') renderReportsTabInstant();
       if (tab === 'expenses') renderExpensesTab();
       if (tab === 'korje') renderKorjeTab();
@@ -687,20 +832,17 @@
       if (tab === 'members') content.innerHTML = adminMembersHtml();
       if (tab === 'deposit') content.innerHTML = adminDepositHtml();
       if (tab === 'password') content.innerHTML = adminPasswordResetHtml();
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 1. Payments Tab
-    function adminPaymentsHtml() {
-      return '<div class="card"><h3 style="margin:0 0 16px;color:var(--blue);">পেমেন্ট আবেদনের তালিকা</h3>' + paymentTable(APP_DATA.payments, true) + '</div>';
-    }
-
-    // 2. Reports Tab
+    // Reports
     function renderReportsTabInstant() {
       const now = new Date();
       const currentYear = now.getFullYear();
       const currentMonth = now.getMonth();
 
-      $('adminTabContent').innerHTML =
+      $('workspaceContent').innerHTML =
         '<div class="card">' +
           '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:18px;">' +
             '<h3 style="margin:0;color:var(--blue);font-size:20px;">📊 আর্থিক অ্যানালিটিক্স ও পেমেন্ট রিপোর্ট</h3>' +
@@ -767,13 +909,13 @@
       $('dueModal').classList.remove('hidden');
     }
 
-    // 3. 💸 খরচ ব্যবস্থাপনা ট্যাব
+    // Expenses
     function renderExpensesTab() {
       const list = APP_DATA.expenses || [];
       const totalExp = list.reduce((s, e) => s + Number(e.Amount || 0), 0);
       const canEdit = hasPerm('expenses_edit');
 
-      $('adminTabContent').innerHTML =
+      $('workspaceContent').innerHTML =
         '<div class="card">' +
           '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:18px;">' +
             '<div><h3 style="margin:0;color:var(--blue);font-size:20px;">💸 খরচ ব্যবস্থাপনা</h3><div style="font-size:13px;color:var(--muted);">মোট খরচ: <b style="color:var(--red);font-size:16px;">' + money(totalExp) + '</b></div></div>' +
@@ -820,12 +962,12 @@
       if (r.ok) { await loadAdmin(); adminTab('expenses'); }
     }
 
-    // 4. করজে হাসানা ও ইনস্টলমেন্ট ট্যাব
+    // Korje Hasana
     function renderKorjeTab() {
       const list = APP_DATA.korjeList || [];
       const canEdit = hasPerm('korje_edit');
 
-      $('adminTabContent').innerHTML =
+      $('workspaceContent').innerHTML =
         '<div class="card">' +
           '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">' +
             '<h3 style="margin:0;color:var(--blue);font-size:20px;">🤝 করজে হাসানা ও ইনস্টলমেন্ট পরিচালনা</h3>' +
@@ -862,12 +1004,12 @@
       });
     }
 
-    // 5. অতিরিক্ত জমার ডিউ জারি
+    // Demands
     function renderDemandsTab() {
       const list = APP_DATA.demandsList || [];
       const canEdit = hasPerm('demands_edit');
 
-      $('adminTabContent').innerHTML =
+      $('workspaceContent').innerHTML =
         '<div class="card">' +
           '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">' +
             '<h3 style="margin:0;color:var(--blue);font-size:20px;">🎯 অতিরিক্ত জমার ডিউ জারি</h3>' +
@@ -890,7 +1032,6 @@
             '<label class="wide">উদ্দেশ্য / ডিউ-এর শিরোনাম<input name="title" required placeholder="যেমন: বিশেষ কল্যাণ তহবিল সংগ্রহ"></label>' +
             '<label>টাকার পরিমাণ (৳)<input name="amount" type="number" step="0.01" min="1" required placeholder="যেমন: 10000"></label>' +
             '<label>পরিশোধের শেষ তারিখ (ডেডলাইন)<input name="deadline" type="date" required></label>' +
-
             '<div class="wide">' +
               '<label>কোন কোন সদস্য এই ডিউ প্রদান করবেন?' +
                 '<div style="margin:6px 0;"><label style="display:flex;align-items:center;gap:8px;font-weight:700;color:var(--blue);cursor:pointer;"><input type="checkbox" id="selectAllMembers" onchange="toggleSelectAllMembers(this)" checked> ☑️ সকল সদস্য নির্বাচন করুন (Select All)</label></div>' +
@@ -900,7 +1041,6 @@
                 '<div class="input-subtext">কাউকে বাদ দিতে চাইলে তার নামের পাশের টিক চিহ্নটি উঠিয়ে দিন।</div>' +
               '</label>' +
             '</div>' +
-
             '<div class="wide" style="margin-top:14px;"><button class="btn primary" type="submit">ডিউ জারি করুন</button> <div id="demandMsg" class="message"></div></div>' +
           '</form>' +
         '</div>';
@@ -920,9 +1060,7 @@
       });
     }
 
-    function toggleSelectAllMembers(master) {
-      document.querySelectorAll('.member-checkbox').forEach(cb => cb.checked = master.checked);
-    }
+    function toggleSelectAllMembers(master) { document.querySelectorAll('.member-checkbox').forEach(cb => cb.checked = master.checked); }
 
     async function toggleDemand(id, status) {
       const r = await callServer('apiAdminToggleDemand', SESSION_TOKEN, id, status);
@@ -937,12 +1075,12 @@
       if (r.ok) { await loadAdmin(); adminTab('demands'); }
     }
 
-    // 6. Notices Tab
+    // Notices
     function renderNoticesTabInstant() {
       const notices = APP_DATA.notices || [];
       const canEdit = hasPerm('notices_edit');
 
-      $('adminTabContent').innerHTML =
+      $('workspaceContent').innerHTML =
         '<div class="card">' +
           '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">' +
             '<h3 style="margin:0;color:var(--blue);font-size:20px;">📢 নোটিশ বোর্ড ম্যানেজমেন্ট</h3>' +
@@ -990,7 +1128,7 @@
       if (r.ok) { await loadAdmin(); adminTab('notices'); }
     }
 
-    // 7. Members Tab (সদস্য তালিকা + পারমিশন কন্ট্রোল বাটন)
+    // Members
     function adminMembersHtml() {
       const rows = APP_DATA.members || [];
       const canEdit = hasPerm('members_edit');
@@ -1001,6 +1139,7 @@
           '<h3 style="margin:0;color:var(--blue);font-size:20px;">সদস্য তালিকা (' + rows.length + ' জন)</h3>' +
           (canEdit ? '<button class="btn primary" onclick="showCreateMember()">＋ নতুন সদস্য যোগ করুন</button>' : '<span style="font-size:12px;color:var(--muted);">[শুধু দেখার অনুমতি]</span>') +
         '</div>' +
+        '<div id="adminMemberFormArea"></div>' +
         '<div class="table-wrap"><table><thead><tr><th>আইডি</th><th>নাম</th><th>মোবাইল</th><th>মোট জমা</th><th>স্ট্যাটাস</th><th>অ্যাকশন</th></tr></thead><tbody>' +
         rows.map(m => '<tr><td><b>' + esc(m.Member_ID) + '</b></td><td>' + esc(m.Full_Name) + '</td><td>' + esc(m.Mobile || '-') + '</td><td>' + money(m.Total_Deposit) + '</td><td>' + statusBadge(m.Status) + '</td><td>' +
           (canEdit ? '<button class="btn secondary" style="padding:6px 12px;font-size:12px;" onclick="showEditMember(\'' + esc(m.Member_ID) + '\')">এডিট / ছবি</button> <button class="btn ghost" style="padding:6px 12px;font-size:12px;" onclick="toggleMemberStatus(\'' + esc(m.Member_ID) + '\',\'' + (m.Status === 'ACTIVE' ? 'INACTIVE' : 'ACTIVE') + '\')">' + (m.Status === 'ACTIVE' ? 'নিষ্ক্রিয়' : 'সক্রিয়') + '</button> ' : '') +
@@ -1011,11 +1150,11 @@
     }
 
     function showCreateMember() {
-      $('adminFormArea').innerHTML =
-        '<div class="card" style="border:1.5px solid var(--blue);">' +
-          '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><h3 style="margin:0;color:var(--blue);">নতুন শিক্ষক/সদস্য নিবন্ধন</h3><button class="btn ghost" onclick="$(\'adminFormArea\').innerHTML=\'\'">বন্ধ</button></div>' +
+      $('adminMemberFormArea').innerHTML =
+        '<div class="card" style="border:1.5px solid var(--blue);margin-bottom:20px;">' +
+          '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><h3 style="margin:0;color:var(--blue);">নতুন শিক্ষক/সদস্য নিবন্ধন</h3><button class="btn ghost" onclick="$(\'adminMemberFormArea\').innerHTML=\'\'">বন্ধ</button></div>' +
           '<form id="createMemberForm" class="form-grid">' +
-            '<label>Member ID<input name="memberId" required placeholder="উদাহরণ: ITS-101"></label>' +
+            '<label>Member ID<input name="memberId" required placeholder="উদাহরণ: ITS-2605"></label>' +
             '<label>পুরো নাম<input name="name" required placeholder="পূর্ণ নাম"></label>' +
             '<label>মোবাইল<input name="mobile" placeholder="017xxxxxxxx"></label>' +
             '<label>যোগদানের তারিখ<input name="joiningDate" type="date"></label>' +
@@ -1056,9 +1195,9 @@
       const m = APP_DATA.members.find(x => x.Member_ID === id);
       if (!m) return;
 
-      $('adminFormArea').innerHTML =
-        '<div class="card" style="border:1.5px solid var(--blue);">' +
-          '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><h3 style="margin:0;color:var(--blue);">সদস্যের তথ্য ও ছবি পরিবর্তন (' + esc(m.Member_ID) + ')</h3><button class="btn ghost" onclick="$(\'adminFormArea\').innerHTML=\'\'">বন্ধ</button></div>' +
+      $('adminMemberFormArea').innerHTML =
+        '<div class="card" style="border:1.5px solid var(--blue);margin-bottom:20px;">' +
+          '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><h3 style="margin:0;color:var(--blue);">সদস্যের তথ্য ও ছবি পরিবর্তন (' + esc(m.Member_ID) + ')</h3><button class="btn ghost" onclick="$(\'adminMemberFormArea\').innerHTML=\'\'">বন্ধ</button></div>' +
           '<div class="profile-row" style="margin-bottom:14px;">' +
             memberPhotoHtml(m.Photo_URL, m.Full_Name) +
             '<div><b>' + esc(m.Full_Name) + '</b><div style="font-size:12px;color:var(--muted);">আইডি: ' + esc(m.Member_ID) + '</div></div>' +
@@ -1068,7 +1207,7 @@
             '<label>পুরো নাম<input name="name" value="' + esc(m.Full_Name) + '" required></label>' +
             '<label>মোবাইল<input name="mobile" value="' + esc(m.Mobile) + '"></label>' +
             '<label class="wide">ঠিকানা / প্রতিষ্ঠান<input name="address" value="' + esc(m.Address) + '"></label>' +
-            '<label class="wide">ছবি পরিবর্তন / নতুন ছবি আপলোড (ঐচ্ছিক)<input type="file" id="editMemberPhotoFile" accept="image/jpeg,image/png,image/webp"><div class="input-subtext">অ্যাডমিন যতবার ইচ্ছা ছবি পরিবর্তন ও প্রতিস্থাপন করতে পারবেন।</div></label>' +
+            '<label class="wide">নতুন ছবি আপলোড / প্রতিস্থাপন করুন (ঐচ্ছিক)<input type="file" id="editMemberPhotoFile" accept="image/jpeg,image/png,image/webp"><div class="input-subtext">অ্যাডমিন যতবার ইচ্ছা ছবি পরিবর্তন ও প্রতিস্থাপন করতে পারবেন।</div></label>' +
             '<div class="wide" style="margin-top:14px;"><button class="btn primary" type="submit">তথ্য ও ছবি সংরক্ষণ করুন</button> <div id="editMemberMsg" class="message"></div></div>' +
           '</form>' +
         '</div>';
@@ -1097,7 +1236,7 @@
       });
     }
 
-    // 🔑 পারমিশন মডাল ওপেন ও হ্যান্ডলার (Master Admin Only)
+    // 🔑 Permissions Modal
     function openPermissionsModal(memberId) {
       const m = APP_DATA.members.find(x => x.Member_ID === memberId);
       if (!m) return;
@@ -1126,7 +1265,7 @@
               '<tr><td><b>৫. 🎯 অতিরিক্ত জমার ডিউ জারি</b></td><td style="text-align:center;"><input type="checkbox" name="perms" value="demands_view" ' + isChecked('demands_view') + '></td><td style="text-align:center;"><input type="checkbox" name="perms" value="demands_edit" ' + isChecked('demands_edit') + '></td></tr>' +
               '<tr><td><b>৬. 📢 নোটিশ বোর্ড</b></td><td style="text-align:center;"><input type="checkbox" name="perms" value="notices_view" ' + isChecked('notices_view') + '></td><td style="text-align:center;"><input type="checkbox" name="perms" value="notices_edit" ' + isChecked('notices_edit') + '></td></tr>' +
               '<tr><td><b>৭. 👥 সদস্য ব্যবস্থাপনা</b></td><td style="text-align:center;"><input type="checkbox" name="perms" value="members_view" ' + isChecked('members_view') + '></td><td style="text-align:center;"><input type="checkbox" name="perms" value="members_edit" ' + isChecked('members_edit') + '></td></tr>' +
-              '<tr><td><b>৮. সরাসরি জমা (Manual Deposit)</b></td><td style="text-align:center;color:var(--muted);">-</td><td style="text-align:center;"><input type="checkbox" name="perms" value="deposit_edit" ' + isChecked('deposit_edit') + '></td></tr>' +
+              '<tr><td><b>৮. সরাসরি জমা (Manual)</b></td><td style="text-align:center;color:var(--muted);">-</td><td style="text-align:center;"><input type="checkbox" name="perms" value="deposit_edit" ' + isChecked('deposit_edit') + '></td></tr>' +
               '<tr><td><b>৯. পাসওয়ার্ড রিসেট</b></td><td style="text-align:center;color:var(--muted);">-</td><td style="text-align:center;"><input type="checkbox" name="perms" value="password_edit" ' + isChecked('password_edit') + '></td></tr>' +
             '</tbody>' +
           '</table>' +
@@ -1151,7 +1290,7 @@
       });
     }
 
-    // 8. Manual Deposit Tab (Full 3-Types)
+    // Manual Deposit
     function adminDepositHtml() {
       const now = new Date();
       const currentYear = now.getFullYear();
@@ -1162,7 +1301,6 @@
         '<h3 style="margin:0 0 18px;color:var(--blue);font-size:20px;">অ্যাডমিন সরাসরি জমা (Manual Entry)</h3>' +
         '<form id="adminDepositForm" class="form-grid">' +
           '<label>সদস্য নির্বাচন করুন<select name="memberId" required><option value="">সিলেক্ট করুন</option>' + APP_DATA.members.filter(m => m.Status === 'ACTIVE').map(m => '<option value="' + esc(m.Member_ID) + '">' + esc(m.Member_ID) + ' — ' + esc(m.Full_Name) + '</option>').join('') + '</select></label>' +
-          
           '<label>পেমেন্টের ধরণ' +
             '<select name="paymentType" id="admTypeSelect" onchange="togglePaymentTypeFields(\'admin\')" required>' +
               '<option value="MONTHLY">মাসিক পেমেন্ট (৫,০০০ ৳)</option>' +
@@ -1170,27 +1308,22 @@
               '<option value="INSTALLMENT">ইনস্টলমেন্ট (করজে হাসানা)</option>' +
             '</select>' +
           '</label>' +
-
           '<label>জমার পরিমাণ (৳)<input name="amount" id="admAmountInput" type="number" step="0.01" min="1" value="5000" required></label>' +
-          
           '<label id="admForMonthGroup">কোন মাসের পেমেন্ট' +
             '<div style="display:flex;gap:8px;margin-top:6px;">' +
               '<select id="admM" style="margin-top:0;">' + MONTH_NAMES.map((m, idx) => '<option value="' + m + '" ' + (idx === currentMonthIdx ? 'selected' : '') + '>' + m + '</option>').join('') + '</select>' +
               '<select id="admY" style="margin-top:0;">' + [currentYear-1, currentYear, currentYear+1, currentYear+2].map(y => '<option value="' + y + '" ' + (y === currentYear ? 'selected' : '') + '>' + y + ' সাল</option>').join('') + '</select>' +
             '</div>' +
           '</label>' +
-
           '<label>পেমেন্ট মেথড<select name="method" required><option value="Cash">Cash (নগদ গ্রহণ)</option><option value="Bank">Bank Deposit</option><option value="bKash">bKash</option><option value="Nagad">Nagad</option></select></label>' +
           '<label>রসিদ / Transaction ID<input name="transactionId" placeholder="রসিদ নম্বর"></label>' +
           '<label>টাকা পাঠানোর তারিখ<input name="date" type="date" value="' + todayStr + '" max="' + todayStr + '" required></label>' +
           '<label class="wide">বিবরণ<input name="description" placeholder="যেমন: সাধারণ সদস্য পেমেন্ট"></label>' +
-          
           '<div class="wide" style="margin-top:14px;"><button class="btn primary" type="submit">লেজারে সরাসরি জমা দিন</button><div id="depositMsg" class="message"></div></div>' +
         '</form>' +
       '</div>';
     }
 
-    // 9. Password Reset Tab
     function adminPasswordResetHtml() {
       return '<div class="card">' +
         '<h3 style="margin:0 0 18px;color:var(--blue);font-size:20px;">সদস্যের পাসওয়ার্ড রিসেট</h3>' +
@@ -1208,12 +1341,7 @@
         const f = new FormData(e.target);
         const pType = $('admTypeSelect').value;
         const payload = Object.fromEntries(f);
-
-        if (pType === 'MONTHLY') {
-          payload.forMonth = $('admM').value + ' ' + $('admY').value;
-        } else {
-          payload.forMonth = pType === 'INSTALLMENT' ? 'ইনস্টলমেন্ট' : 'সাধারণ জমা';
-        }
+        payload.forMonth = pType === 'MONTHLY' ? ($('admM').value + ' ' + $('admY').value) : (pType === 'INSTALLMENT' ? 'ইনস্টলমেন্ট' : 'সাধারণ জমা');
 
         const r = await callServer('apiAdminManualDeposit', SESSION_TOKEN, payload);
         showMessage('depositMsg', r.message, r.ok);
@@ -1228,7 +1356,6 @@
       }
     });
 
-    // Payment Table & Review Modal
     function paymentTable(rows, isAdmin) {
       if (!rows || !rows.length) return '<div style="text-align:center;color:var(--muted);padding:30px;">কোনো পেমেন্ট রেকর্ড পাওয়া যায়নি।</div>';
       const canEdit = hasPerm('payments_edit');
@@ -1283,28 +1410,6 @@
       const r = await callServer('apiAdminSetMemberStatus', SESSION_TOKEN, id, st);
       toast(r.message);
       if (r.ok) { await loadAdmin(); adminTab('members'); }
-    }
-
-    function openPasswordForm(force) {
-      const area = $('memberFormArea');
-      if (!area) return;
-      area.innerHTML =
-        '<div class="card" style="border-top:5px solid var(--gold);">' +
-          '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><h3 style="margin:0;color:var(--blue);">পাসওয়ার্ড পরিবর্তন করুন</h3>' + (force ? '' : '<button class="btn ghost" onclick="$(\'memberFormArea\').innerHTML=\'\'">বন্ধ</button>') + '</div>' +
-          '<form id="userPassChangeForm" class="form-grid">' +
-            '<label>বর্তমান পাসওয়ার্ড<input name="oldPassword" type="password" required></label>' +
-            '<label>নতুন পাসওয়ার্ড (কমপক্ষে ১০ অক্ষর)<input name="newPassword" type="password" minlength="10" required></label>' +
-            '<div class="wide" style="margin-top:14px;"><button class="btn primary" type="submit">পাসওয়ার্ড আপডেট করুন</button><div id="passChangeMsg" class="message"></div></div>' +
-          '</form>' +
-        '</div>';
-
-      $('userPassChangeForm').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const f = new FormData(e.target);
-        const r = await callServer('apiChangePassword', SESSION_TOKEN, f.get('oldPassword'), f.get('newPassword'));
-        showMessage('passChangeMsg', r.message, r.ok);
-        if (r.ok) { toast(r.message); $('mustChangeNotice').classList.add('hidden'); setTimeout(() => $('memberFormArea').innerHTML = '', 1500); }
-      });
     }
   </script>
 </body>
