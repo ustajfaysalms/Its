@@ -258,6 +258,51 @@
       .card { padding: 18px 16px; border-radius: 18px; }
       .stat-value { font-size: 24px; }
     }
+
+    /* Refined member dashboard */
+    .member-welcome{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 20px;border:1px solid #dce7f5;border-radius:18px;background:linear-gradient(115deg,#fff 0%,#f1f6ff 100%);box-shadow:0 8px 24px rgba(15,44,89,.055);margin-bottom:16px}
+    .member-welcome h2{margin:0;color:var(--blue);font-size:21px;line-height:1.25}.member-welcome p{margin:4px 0 0;color:var(--muted);font-size:13px}
+    .member-id-chip{border-radius:999px;background:#e5edf9;color:var(--blue);font-size:12px;font-weight:700;padding:7px 11px;white-space:nowrap}
+    .member-kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:14px 0 18px}
+    .member-kpi{min-width:0;min-height:112px;padding:14px;border:1px solid var(--line);border-radius:15px;background:#fff;box-shadow:0 5px 18px rgba(15,44,89,.045);display:flex;flex-direction:column;justify-content:space-between}
+    .member-kpi-top{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px;font-weight:600;line-height:1.35}
+    .member-kpi-icon{width:30px;height:30px;display:grid;place-items:center;border-radius:9px;background:#edf3fc;font-size:16px;flex:0 0 auto}
+    .member-kpi-value{font-size:clamp(17px,2vw,23px);font-weight:800;color:var(--blue);line-height:1.2;overflow-wrap:anywhere}
+    .member-kpi.due{background:#fff8f7;border-color:#f5d7d4}.member-kpi.due .member-kpi-icon{background:#fde8e6}.member-kpi.due .member-kpi-value{color:#b42318}
+    .member-kpi.own{background:#f4fbf6;border-color:#d8eddf}.member-kpi.own .member-kpi-icon{background:#e0f3e6}.member-kpi.own .member-kpi-value{color:#137333}
+    .member-kpi.fund{background:#fffaf0;border-color:#f1e3bf}.member-kpi.fund .member-kpi-icon{background:#fff0c9}.member-kpi.fund .member-kpi-value{color:#936b0b}
+    .member-kpi.balance{background:#f1f6ff;border-color:#d6e4fb}.member-kpi.balance .member-kpi-icon{background:#dfeaff}
+    .member-section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:20px 0 10px}
+    .member-section-title h3{font-size:16px;color:var(--blue);margin:0}.member-section-title span{font-size:11px;color:var(--muted)}
+    .member-due-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(205px,1fr));gap:12px;margin:0 0 16px}
+    .member-due-grid .due-card{padding:15px;border-radius:15px;min-height:145px}
+    .member-due-grid .due-card>div>div:nth-child(2){font-size:22px!important}
+    .member-analytics{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(280px,.9fr);gap:14px;margin-top:16px}
+    .member-panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 5px 18px rgba(15,44,89,.04);min-width:0}
+    .member-panel h3{font-size:15px;color:var(--blue);margin:0 0 12px}
+    .member-chart{height:178px;display:flex;align-items:flex-end;gap:10px;padding:14px 4px 0;border-bottom:1px solid #dce5f2;background:repeating-linear-gradient(to bottom,transparent 0,transparent 43px,#edf1f7 44px)}
+    .member-chart-col{flex:1;min-width:0;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px}
+    .member-chart-bar{width:min(34px,75%);min-height:4px;border-radius:7px 7px 2px 2px;background:linear-gradient(180deg,#4d91df,#0f4a8d);position:relative}
+    .member-chart-bar.pending{background:linear-gradient(180deg,#f1cf73,#c59b27)}
+    .member-chart-label{font-size:10px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+    .member-chart-value{font-size:9px;color:var(--muted);white-space:nowrap}
+    .member-recent-list{display:flex;flex-direction:column;gap:0}
+    .member-recent-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:9px;align-items:center;padding:10px 0;border-bottom:1px solid #edf1f6;font-size:12px}
+    .member-recent-row:last-child{border-bottom:0}.member-recent-name{font-weight:600;color:var(--ink)}.member-recent-date{font-size:10px;color:var(--muted)}
+    .member-empty{font-size:12px;color:var(--muted);padding:20px 4px;text-align:center}
+    @media(max-width:900px){.member-kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.member-analytics{grid-template-columns:1fr}}
+    @media(max-width:520px){
+      .member-welcome{padding:13px 14px;border-radius:14px}.member-welcome h2{font-size:18px}.member-id-chip{font-size:10px;padding:6px 8px}
+      .member-kpi-grid{gap:8px;margin:10px 0 14px}.member-kpi{min-height:100px;padding:11px;border-radius:13px}
+      .member-kpi-top{font-size:10px;gap:6px}.member-kpi-icon{width:27px;height:27px;font-size:14px;border-radius:8px}
+      .member-kpi-value{font-size:17px}.member-due-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+      .member-due-grid .due-card{padding:11px;min-height:136px}.member-due-grid .due-card b{font-size:12px!important}
+      .member-due-grid .due-card>div>div:nth-child(2){font-size:18px!important}
+      .member-due-grid .btn{font-size:11px!important;padding:7px 9px!important}
+      .member-panel{padding:13px;border-radius:14px}.member-chart{height:150px;gap:6px}
+      .member-recent-row{grid-template-columns:minmax(0,1fr) auto;gap:6px}.member-recent-row .member-recent-date{grid-column:1}
+    }
+
   </style>
 </head>
 <body>
@@ -562,56 +607,35 @@
       const hasPhoto = Boolean(p.Photo_URL && p.Photo_URL.trim());
 
       if (sec === 'home') {
+        const approved = (r.payments || []).filter(x => String(x.Status).toUpperCase() === 'APPROVED');
+        const chartItems = approved.slice(0, 6).reverse();
+        const maxChart = Math.max(1, ...chartItems.map(x => Number(x.Amount || 0)));
+        const chartHtml = chartItems.length ? chartItems.map(x =>
+          '<div class="member-chart-col"><div class="member-chart-value">' + money(x.Amount || 0) + '</div><div class="member-chart-bar" style="height:' + Math.max(5, (Number(x.Amount || 0) / maxChart) * 112) + 'px;"></div><div class="member-chart-label">' + esc((x.For_Month || x.Payment_Date || '').toString().slice(0, 12)) + '</div></div>'
+        ).join('') : '<div class="member-empty">এখনো অনুমোদিত জমার তথ্য নেই</div>';
+        const recentHtml = (r.payments || []).slice(0, 5).map(x =>
+          '<div class="member-recent-row"><div><div class="member-recent-name">' + esc(x.Payment_Type === 'MONTHLY' ? 'মাসিক জমা' : x.Payment_Type === 'EXTRA' ? 'অতিরিক্ত জমা' : x.Payment_Type === 'INSTALLMENT' ? 'করজে হাসানা' : x.Payment_Type) + '</div><div class="member-recent-date">' + esc(x.Payment_Date || x.Submitted_At || '-') + '</div></div><b>' + money(x.Amount || 0) + '</b><span class="status-badge ' + (String(x.Status).toUpperCase() === 'APPROVED' ? 'approved' : '') + '">' + esc(x.Status || '-') + '</span></div>'
+        ).join('') || '<div class="member-empty">কোনো পেমেন্ট রেকর্ড পাওয়া যায়নি</div>';
+
         target.innerHTML =
-          '<div class="card profile-row">' +
-            memberPhotoHtml(p.Photo_URL, p.Full_Name) +
-            '<div style="flex:1;"><b style="font-size:20px;color:var(--blue);">' + esc(p.Full_Name) + '</b><div style="font-size:13px;color:var(--muted);">Member ID: <b>' + esc(p.Member_ID) + '</b> • ' + statusBadge(p.Status) + '</div><div style="font-size:13px;color:var(--muted);">' + esc(p.Mobile || '-') + '</div>' +
-            (hasPhoto ?
-              '<div style="font-size:12px;color:var(--green);font-weight:600;margin-top:6px;">✓ প্রোফাইল ছবি সংরক্ষিত (পরিবর্তনযোগ্য নয়)</div>' :
-              '<div><button class="btn secondary" style="padding:6px 14px;font-size:13px;margin-top:8px;" onclick="uploadOwnPhoto()">📷 ছবি আপলোড করুন</button>' +
-              '<div class="input-subtext" style="font-size:11px;">প্রথমবার একবারই ছবি আপলোড করতে পারবেন।</div></div>'
-            ) +
-            '</div></div>' +
-
-          '<div class="dues-container">' +
-            '<div class="due-card ' + (dues.monthly.isPaid ? 'paid' : 'monthly') + '">' +
-              '<div>' +
-                '<b style="font-size:15px;' + (dues.monthly.isPaid ? 'color:var(--green);' : 'color:var(--red);') + '">' + (dues.monthly.isPaid ? '✓ সকল মাসিক পেমেন্ট পরিশোধিত' : '🔴 বকেয়া মাসিক পেমেন্ট ডিউ') + '</b>' +
-                '<div style="font-size:24px;font-weight:800;margin:6px 0;">' + (dues.monthly.isPaid ? '৳ ০' : money(dues.monthly.amount)) + '</div>' +
-                '<div style="font-size:12px;color:var(--muted);">' + (dues.monthly.isPaid ? 'কোনো মাসিক ফি বকেয়া নেই' : dues.monthly.monthStr + ' (সময়সীমা: ' + dues.monthly.deadline + ')') + '</div>' +
-                (!dues.monthly.isPaid && dues.monthly.monthsCount > 1 ? '<div style="font-size:12px;color:var(--red);font-weight:700;margin-top:4px;">⚠️ মোট ' + dues.monthly.monthsCount + ' মাসের পেমেন্ট বকেয়া</div>' : '') +
-              '</div>' +
-              (!dues.monthly.isPaid ? '<button class="btn danger" style="padding:8px 14px;margin-top:14px;font-size:13px;" onclick="quickPay(\'MONTHLY\', ' + dues.monthly.amount + ')">এখনই পরিশোধ করুন</button>' : '') +
-            '</div>' +
-
-            (dues.extra ? 
-              '<div class="due-card extra">' +
-                '<div>' +
-                  '<b style="font-size:15px;color:var(--gold-dark);">🟠 অতিরিক্ত জমার ডিউ</b>' +
-                  '<div style="font-size:24px;font-weight:800;margin:6px 0;color:var(--gold-dark);">' + money(dues.extra.amount) + '</div>' +
-                  '<div style="font-size:13px;color:var(--ink);"><b>' + esc(dues.extra.title) + '</b></div>' +
-                  '<div style="font-size:12px;color:var(--red);margin-top:4px;">শেষ তারিখ: <b>' + esc(dues.extra.deadline) + '</b></div>' +
-                '</div>' +
-                '<button class="btn gold" style="padding:8px 14px;margin-top:14px;font-size:13px;" onclick="quickPay(\'EXTRA\', ' + dues.extra.amount + ', \'\', \'' + esc(dues.extra.demandId) + '\')">এখনই পরিশোধ করুন</button>' +
-              '</div>' : '') +
-
-            (dues.korje ?
-              '<div class="due-card ' + (dues.korje.isPaid ? 'paid' : 'korje') + '">' +
-                '<div>' +
-                  '<b style="font-size:15px;color:var(--blue);">' + (dues.korje.isPaid ? '✓ চলতি মাসের ইনস্টলমেন্ট সম্পন্ন' : '🔵 করজে হাসানা ইনস্টলমেন্ট ডিউ') + '</b>' +
-                  '<div style="font-size:24px;font-weight:800;margin:6px 0;">' + (dues.korje.isPaid ? '৳ ০' : money(dues.korje.monthlyInstallment)) + '</div>' +
-                  '<div style="font-size:12px;color:var(--muted);">শেষ তারিখ: প্রতি মাসের ' + esc(dues.korje.installmentDay) + ' তারিখ</div>' +
-                  '<div style="font-size:13px;color:var(--blue);font-weight:700;margin-top:6px;">অবশিষ্ট করজে হাসানা: ' + money(dues.korje.remaining) + '</div>' +
-                '</div>' +
-                (!dues.korje.isPaid ? '<button class="btn primary" style="padding:8px 14px;margin-top:14px;font-size:13px;" onclick="quickPay(\'INSTALLMENT\', ' + dues.korje.monthlyInstallment + ', \'\', \'' + esc(dues.korje.korjeId) + '\')">ইনস্টলমেন্ট জমা দিন</button>' : '') +
-              '</div>' : '') +
+          '<div class="member-welcome"><div><h2>আসসালামু আলাইকুম, ' + esc(p.Full_Name) + '</h2><p>আপনার সদস্য অ্যাকাউন্টের সারসংক্ষেপ</p></div><span class="member-id-chip">ID: ' + esc(p.Member_ID) + '</span></div>' +
+          '<div class="member-kpi-grid">' +
+            '<div class="member-kpi due"><div class="member-kpi-top"><span class="member-kpi-icon">📅</span>বকেয়া মাসিক পেমেন্ট</div><div class="member-kpi-value">' + (dues.monthly.isPaid ? '৳ ০' : money(dues.monthly.amount)) + '</div><div class="member-kpi-top">' + (dues.monthly.isPaid ? 'সব মাসিক পেমেন্ট পরিশোধিত' : (dues.monthly.monthsCount || 1) + ' মাস বকেয়া') + '</div></div>' +
+            '<div class="member-kpi own"><div class="member-kpi-top"><span class="member-kpi-icon">💳</span>আপনার অনুমোদিত জমা</div><div class="member-kpi-value">' + money(r.ownTotal || 0) + '</div><div class="member-kpi-top">আপনার নামে মোট অনুমোদিত</div></div>' +
+            '<div class="member-kpi fund"><div class="member-kpi-top"><span class="member-kpi-icon">🏦</span>সোসাইটির মোট জমা</div><div class="member-kpi-value">' + money(r.organizationTotal || 0) + '</div><div class="member-kpi-top">সমিতির তহবিলে মোট জমা</div></div>' +
+            '<div class="member-kpi balance"><div class="member-kpi-top"><span class="member-kpi-icon">📈</span>সোসাইটির বর্তমান ব্যালেন্স</div><div class="member-kpi-value">' + money(r.currentBalance || 0) + '</div><div class="member-kpi-top">খরচ বাদে অবশিষ্ট</div></div>' +
           '</div>' +
-
-          '<div class="stats">' +
-            '<div class="stat green"><div class="stat-label">আপনার নিজস্ব অনুমোদিত জমা</div><div class="stat-value">' + money(r.ownTotal) + '</div></div>' +
-            '<div class="stat gold"><div class="stat-label">সোসাইটির মোট জমা (তহবিল)</div><div class="stat-value">' + money(r.organizationTotal) + '</div></div>' +
-            '<div class="stat red"><div class="stat-label">সোসাইটির মোট খরচ</div><div class="stat-value">' + money(r.organizationExpense || 0) + '</div></div>' +
-            '<div class="stat"><div class="stat-label">সোসাইটির বর্তমান ব্যালেন্স</div><div class="stat-value" style="color:var(--green);">' + money(r.currentBalance || 0) + '</div></div>' +
+          '<div class="member-section-title"><h3>আপনার বকেয়া ও পরিশোধ</h3><span>Payment status</span></div>' +
+          '<div class="member-due-grid">' +
+            '<div class="due-card ' + (dues.monthly.isPaid ? 'paid' : 'monthly') + '"><div><b style="font-size:14px;' + (dues.monthly.isPaid ? 'color:var(--green);' : 'color:var(--red);') + '">' + (dues.monthly.isPaid ? '✓ মাসিক পেমেন্ট সম্পন্ন' : 'বকেয়া মাসিক পেমেন্ট') + '</b><div style="font-size:22px;font-weight:800;margin:6px 0;">' + (dues.monthly.isPaid ? '৳ ০' : money(dues.monthly.amount)) + '</div><div style="font-size:11px;color:var(--muted);">' + (dues.monthly.isPaid ? 'কোনো মাসিক ফি বকেয়া নেই' : esc(dues.monthly.monthStr) + ' · শেষ তারিখ ' + esc(dues.monthly.deadline)) + '</div>' + (!dues.monthly.isPaid && dues.monthly.monthsCount > 1 ? '<div style="font-size:11px;color:var(--red);font-weight:700;margin-top:4px;">' + dues.monthly.monthsCount + ' মাসের পেমেন্ট বকেয়া</div>' : '') + '</div>' + (!dues.monthly.isPaid ? '<button class="btn danger" style="padding:7px 11px;margin-top:10px;font-size:12px;" onclick="quickPay(\'MONTHLY\', ' + dues.monthly.amount + ')">পরিশোধ করুন</button>' : '') + '</div>' +
+            (dues.extra ? '<div class="due-card extra"><div><b style="font-size:14px;color:var(--gold-dark);">অতিরিক্ত জমার ডিউ</b><div style="font-size:22px;font-weight:800;margin:6px 0;color:var(--gold-dark);">' + money(dues.extra.amount) + '</div><div style="font-size:12px;"><b>' + esc(dues.extra.title) + '</b></div><div style="font-size:11px;color:var(--red);margin-top:4px;">শেষ তারিখ: ' + esc(dues.extra.deadline) + '</div></div><button class="btn gold" style="padding:7px 11px;margin-top:10px;font-size:12px;" onclick="quickPay(\'EXTRA\', ' + dues.extra.amount + ', \'\', \'' + esc(dues.extra.demandId) + '\')">জমা দিন</button></div>' : '') +
+            (dues.korje ? '<div class="due-card ' + (dues.korje.isPaid ? 'paid' : 'korje') + '"><div><b style="font-size:14px;color:var(--blue);">' + (dues.korje.isPaid ? '✓ ইনস্টলমেন্ট সম্পন্ন' : 'করজে হাসানা ইনস্টলমেন্ট') + '</b><div style="font-size:22px;font-weight:800;margin:6px 0;">' + (dues.korje.isPaid ? '৳ ০' : money(dues.korje.monthlyInstallment)) + '</div><div style="font-size:11px;color:var(--muted);">শেষ তারিখ: ' + esc(dues.korje.deadline || dues.korje.installmentDay) + '</div><div style="font-size:11px;color:var(--blue);font-weight:700;margin-top:4px;">অবশিষ্ট: ' + money(dues.korje.remaining) + '</div></div>' + (!dues.korje.isPaid ? '<button class="btn primary" style="padding:7px 11px;margin-top:10px;font-size:12px;" onclick="quickPay(\'INSTALLMENT\', ' + dues.korje.monthlyInstallment + ', \'\', \'' + esc(dues.korje.korjeId) + '\')">ইনস্টলমেন্ট দিন</button>' : '') + '</div>' : '') +
+          '</div>' +
+          '<div class="member-analytics"><div class="member-panel"><h3>📊 আপনার জমার চিত্র <span style="font-size:10px;color:var(--muted);font-weight:400;">(সর্বশেষ ৬টি অনুমোদিত জমা)</span></h3><div class="member-chart">' + chartHtml + '</div></div><div class="member-panel"><h3>🧾 সাম্প্রতিক পেমেন্ট</h3><div class="member-recent-list">' + recentHtml + '</div></div></div>' +
+          '<div class="member-section-title"><h3>সোসাইটির আর্থিক সারসংক্ষেপ</h3><span>Society overview</span></div>' +
+          '<div class="member-kpi-grid" style="grid-template-columns:repeat(2,minmax(0,1fr));">' +
+            '<div class="member-kpi"><div class="member-kpi-top"><span class="member-kpi-icon">💰</span>সোসাইটির মোট খরচ</div><div class="member-kpi-value">' + money(r.organizationExpense || 0) + '</div></div>' +
+            '<div class="member-kpi"><div class="member-kpi-top"><span class="member-kpi-icon">👤</span>আপনার প্রোফাইল</div><div class="member-kpi-value" style="font-size:16px;">' + esc(p.Status || 'সক্রিয়') + '</div></div>' +
           '</div>';
       }
 
